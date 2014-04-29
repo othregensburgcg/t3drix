@@ -54,8 +54,9 @@ function init(){
 	cube_o.position.y = 0;
 	cube_o.position.z = 0;
 	*/
-	cube_o = new StoneLeftS().create();
-	scene.add(cube_o);
+	cube_o = new StoneLeftS();
+	cube_o.create();
+	scene.add(cube_o.mesh);
 	
 	var light = new THREE.PointLight(0xffffff);
 	light.position.z = 15;
