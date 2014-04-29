@@ -46,13 +46,15 @@ function init(){
 	document.body.appendChild(renderer.domElement);
 	
 	addGrid();
-	
+	/*
 	var cube_g 	= new THREE.CubeGeometry(2, 2, 2);
 	var cube_m 	= new THREE.MeshLambertMaterial({color: 0x0000aa});
 	cube_o	= new THREE.Mesh(cube_g, cube_m);
 	cube_o.position.x = 0;
 	cube_o.position.y = 0;
 	cube_o.position.z = 0;
+	*/
+	cube_o = new StoneLeftS().create();
 	scene.add(cube_o);
 	
 	var light = new THREE.PointLight(0xffffff);
