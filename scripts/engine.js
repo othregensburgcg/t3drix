@@ -4,7 +4,10 @@ var renderer;
 
 var grid;
 var axis;
-var cube_o;
+var example_object;
+
+var textureWood;
+var textureConcrete;
 
 function addGrid(){
 	var gridgeometry = new THREE.Geometry();	
@@ -34,8 +37,18 @@ function addGrid(){
 	scene.add(axis);
 }
 
-function init(){
+function load(){
 	//Starting Point ---
+	textureWood = new THREE.ImageUtils.loadTexture("./assets/textures/wood.jpg");
+	textureConcrete = new THREE.ImageUtils.loadTexture("./assets/textures/concrete.jpg");
+    init();
+}
+
+function sceneAnimation(){
+	example_object.mesh.rotation.y += 0.01;
+}
+
+function init(){
 	var w = window.innerWidth;
 	var h = window.innerHeight;
 	
@@ -47,34 +60,28 @@ function init(){
 	document.body.appendChild(renderer.domElement);
 	
 	addGrid();
-	/*
-	var cube_g 	= new THREE.CubeGeometry(2, 2, 2);
-	var cube_m 	= new THREE.MeshLambertMaterial({color: 0x0000aa});
-	cube_o	= new THREE.Mesh(cube_g, cube_m);
-	cube_o.position.x = 0;
-	cube_o.position.y = 0;
-	cube_o.position.z = 0;
-	*/
-	cube_o = new StoneLeftS();
-	cube_o.create();
-	scene.add(cube_o.mesh);
+
+	example_object = new StoneT();
+	example_object.create();
+	scene.add(example_object.mesh);
 	
-	var light = new THREE.PointLight(0xffffff);
+	var light = new THREE.PointLight(0xffffff, 1.5, 0.0);//color, intensity, distance
 	light.position.z = 15;
-	light.position.y = 5;
-	light.rotation.x = -0.3;
+	light.position.y = 18;
+	light.rotation.x = -0.4;
 	scene.add(light);
 	
 	camera.position.x = 0;
 	camera.position.y = 5;
-	camera.position.z = 12;
+	camera.position.z = 7;
 	camera.rotation.x = -0.8;
 	
 	render();
 }
 
 function render() {
-	requestAnimationFrame(render);	
+	requestAnimationFrame(render);
+	sceneAnimation();
 	renderer.render(scene, camera);
 }
 
