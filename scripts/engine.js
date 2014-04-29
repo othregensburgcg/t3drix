@@ -35,6 +35,7 @@ function addGrid(){
 }
 
 function init(){
+	//Starting Point
 	var w = window.innerWidth;
 	var h = window.innerHeight;
 	
