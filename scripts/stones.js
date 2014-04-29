@@ -4,7 +4,7 @@ var StoneLeftS = function(){
 
 	this.create = function(){
 		var object;
-		var geometry = new THREE.CubeGeometry(2, 2, 2);
+		var geometry = new THREE.CubeGeometry(1, 1, 1);
 		this.color = 0xaa0000;
 		var material 	= new THREE.MeshLambertMaterial({color: this.color});
 		object	= new THREE.Mesh(geometry, material);
