@@ -6,18 +6,6 @@ var grid;
 var axis;
 var cube_o;
 
-function render() {
-	requestAnimationFrame(render);	
-	renderer.render(scene, camera);
-}
-
-function resize(){
-	camera.aspect = window.innerWidth/window.innerHeight;
-	camera.updateProjectionMatrix();
-	
-	renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
 function addGrid(){
 	var gridgeometry = new THREE.Geometry();	
 	for(var i=-10; i<=10; i++){
@@ -62,6 +50,9 @@ function init(){
 	var cube_g 	= new THREE.CubeGeometry(2, 2, 2);
 	var cube_m 	= new THREE.MeshLambertMaterial({color: 0x0000aa});
 	cube_o	= new THREE.Mesh(cube_g, cube_m);
+	cube_o.position.x = 0;
+	cube_o.position.y = 0;
+	cube_o.position.z = 0;
 	scene.add(cube_o);
 	
 	var light = new THREE.PointLight(0xffffff);
@@ -70,5 +61,22 @@ function init(){
 	light.rotation.x = -0.3;
 	scene.add(light);
 	
+	camera.position.x = 0;
+	camera.position.y = 5;
+	camera.position.z = 12;
+	camera.rotation.x = -0.8;
+	
 	render();
+}
+
+function render() {
+	requestAnimationFrame(render);	
+	renderer.render(scene, camera);
+}
+
+function resize(){
+	camera.aspect = window.innerWidth/window.innerHeight;
+	camera.updateProjectionMatrix();
+	
+	renderer.setSize(window.innerWidth, window.innerHeight);
 }
