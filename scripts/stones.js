@@ -58,6 +58,6 @@ var StoneCube = function(){
 
 var StoneLine = function(){
 
-}
+};
 
 var wood = new THREE.MeshLambertMaterial({map: textureWood}); //texture
