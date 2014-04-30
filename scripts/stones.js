@@ -34,7 +34,7 @@ var mesh;
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
 		//var material = new THREE.MeshLambertMaterial({color: this.color}); //color
-		var material = new THREE.MeshLambertMaterial({map: textureWood}); //texture
+		var material = wood;
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -59,3 +59,5 @@ var StoneCube = function(){
 var StoneLine = function(){
 
 }
+
+var wood = new THREE.MeshLambertMaterial({map: textureWood}); //texture
