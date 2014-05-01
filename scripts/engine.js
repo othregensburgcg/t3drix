@@ -1,12 +1,9 @@
-var scene;
-var camera;
-var renderer;
+var scene, camera, renderer, composer;
 
-var grid;
-var axis;
-var example_object;
-
+var grid, axis;
 var materials;
+
+var example_object;
 
 function addStandardGrid(){
 	var gridgeometry = new THREE.Geometry();	
@@ -63,6 +60,7 @@ function load(){
 	materials = new Materials();
 	materials.load();
     init();
+    render();
 }
 
 function sceneAnimation(){
@@ -76,7 +74,10 @@ function init(){
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+	
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
+	
+	
 	renderer.setClearColor(0x000000, 0);
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
@@ -97,6 +98,8 @@ function init(){
 	scene.add(new StoneT().create(6.5, 3.5).mesh);
 	
 	var light = new THREE.PointLight(0xffffff, 1.5, 0.0);//color, intensity, distance
+	light.shadowMapWidth = 1024; //better antialias - default is 512
+	light.shadowMapHeight = 1024; //better antialias - default is 512
 	light.position.z = 5;
 	light.position.y = 7;
 	light.rotation.x = .0;
@@ -107,13 +110,27 @@ function init(){
 	camera.position.z = 20;
 	camera.rotation.y = .07;
 	
-	render();
+	//postprocessing
+	composer = new THREE.EffectComposer( renderer );
+	composer.addPass( new THREE.RenderPass( scene, camera ) );
+
+	var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
+	dotScreenEffect.uniforms[ 'scale' ].value = 4;
+	composer.addPass( dotScreenEffect );
+
+	var rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
+	rgbEffect.uniforms[ 'amount' ].value = 0.0015;
+	rgbEffect.renderToScreen = true;
+	composer.addPass( rgbEffect );
+	
 }
 
 function render() {
 	requestAnimationFrame(render);
 	sceneAnimation();
-	renderer.render(scene, camera);
+	//renderer.render(scene, camera);
+	
+	composer.render();
 }
 
 function resize(){
