@@ -76,6 +76,7 @@ function init(){
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
 	renderer.setClearColor(0x000000, 0);
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
