@@ -103,8 +103,8 @@ function init(){
 	scene.add(new StoneT().create(6.5, 3.5).mesh);
 	
 	var light = new THREE.PointLight(0xffffff, 1.5, 0.0);//color, intensity, distance
-	light.shadowMapWidth = 1024; //better antialias - default is 512
-	light.shadowMapHeight = 1024; //better antialias - default is 512
+	light.shadowMapWidth = 2048; //better antialias - default is 512
+	light.shadowMapHeight = 2048; //better antialias - default is 512
 	light.position.z = 5;
 	light.position.y = 7;
 	light.rotation.x = .0;
