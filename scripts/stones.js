@@ -33,6 +33,30 @@ var StoneLeftS = function(){
 				
 		return this;
 	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
+		return this;
+	};
 };
 
 var StoneRightS = function(){

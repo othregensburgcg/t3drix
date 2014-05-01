@@ -1,14 +1,15 @@
 document.onkeydown = function(evt){
 	evt = evt || window.event;
+	evt.preventDefault();
 	switch(evt.keyCode){
 		case 37: /* links - taste behandeln */
-			alert("left");
+			stone.moveLeft();
 			break;
 		case 38: /* oben - taste behandeln */
 			alert("up");
 			break;
 		case 39: /* rechts - taste behandeln */
-			alert("right");
+			stone.moveRight();
 			break ;
 		case 40: /* unten - taste behandeln */
 			alert("down");

@@ -70,6 +70,7 @@ function load(){
 
 function sceneAnimation(){
 	//example_object.mesh.rotation.y += 0.01;
+	stone.moveDown(.01);
 }
 
 function init(){
@@ -94,21 +95,20 @@ function init(){
 	example_object.create();
 	scene.add(example_object.mesh);
 	*/
-	scene.add(new StoneLine().create(9.5).mesh);
-	scene.add(new StoneLeftS().create(1.5).mesh);
-	scene.add(new StoneRightS().create(4.5).mesh);
-	scene.add(new StoneCube().create(2.5, 1.5).mesh);
-	scene.add(new StoneLeftL().create(6.5).mesh);
-	scene.add(new StoneRightL().create(7.5).mesh);
-	scene.add(new StoneT().create(6.5, 3.5).mesh);
 	
-	var light = new THREE.PointLight(0xffffff, 1.5, 0.0);//color, intensity, distance
+	startGame();
+	
+	var light = new THREE.PointLight(0xffffff, .9, 0.0);//color, intensity, distance
 	light.shadowMapWidth = 2048; //better antialias - default is 512
 	light.shadowMapHeight = 2048; //better antialias - default is 512
+	light.position.x = 5;
+	light.position.y = 30;
 	light.position.z = 5;
-	light.position.y = 7;
-	light.rotation.x = .0;
+	light.rotation.x = .25;
 	scene.add(light);
+	
+	var ambientLight = new THREE.AmbientLight(0xffffff);
+    scene.add(ambientLight);
 	
 	camera.position.x = 5;
 	camera.position.y = 10;
