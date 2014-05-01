@@ -1,4 +1,8 @@
 var scene, camera, renderer, composer;
+var dpr, effectFXAA, renderScene;
+
+var composerEnabled = true;
+var useSpecifiedMaterial;
 
 var grid, axis;
 var materials;
@@ -59,6 +63,7 @@ function load(){
 	//Starting Point ---
 	materials = new Materials();
 	materials.load();
+	useSpecifiedMaterial = null;//materials.??? or null for testing materials on all stones
     init();
     render();
 }
@@ -78,7 +83,7 @@ function init(){
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
 	
 	
-	renderer.setClearColor(0x000000, 0);
+	renderer.setClearColor(0xFFFFFF, 0);
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
 	
@@ -105,37 +110,47 @@ function init(){
 	light.rotation.x = .0;
 	scene.add(light);
 	
-	camera.position.x = 7;
+	camera.position.x = 5;
 	camera.position.y = 10;
-	camera.position.z = 20;
-	camera.rotation.y = .07;
+	camera.position.z = 15;
+	//camera.rotation.y = .07;
 	
 	//postprocessing
-	composer = new THREE.EffectComposer( renderer );
-	composer.addPass( new THREE.RenderPass( scene, camera ) );
+	if (window.devicePixelRatio !== undefined) {
+	  dpr = window.devicePixelRatio;
+	}
 
-	var dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-	dotScreenEffect.uniforms[ 'scale' ].value = 4;
-	composer.addPass( dotScreenEffect );
+	renderer.autoClear = false;
+	
+	renderScene = new THREE.RenderPass(scene, camera);
+	
+	effectFXAA = new THREE.ShaderPass(THREE.FXAAShader);
+	effectFXAA.uniforms['resolution'].value.set(1 / (window.innerWidth * dpr), 1 / (window.innerHeight * dpr));
+	effectFXAA.renderToScreen = true;
 
-	var rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
-	rgbEffect.uniforms[ 'amount' ].value = 0.0015;
-	rgbEffect.renderToScreen = true;
-	composer.addPass( rgbEffect );
+	composer = new THREE.EffectComposer(renderer);
+	composer.setSize(window.innerWidth * dpr, window.innerHeight * dpr);
+	composer.addPass(renderScene);
+	composer.addPass(effectFXAA);
 	
 }
 
 function render() {
 	requestAnimationFrame(render);
 	sceneAnimation();
-	//renderer.render(scene, camera);
 	
-	composer.render();
+	if(!composerEnabled) renderer.render(scene, camera); //use standard renderer
+	else{//use postprocessing with shaders
+		renderer.clear();
+		composer.render();
+	}
 }
 
 function resize(){
 	camera.aspect = window.innerWidth/window.innerHeight;
-	camera.updateProjectionMatrix();
-	
+	camera.updateProjectionMatrix();	
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	
+	effectFXAA.uniforms['resolution'].value.set(1 / (window.innerWidth * dpr), 1 / (window.innerHeight * dpr));
+	composer.setSize(window.innerWidth * dpr, window.innerHeight * dpr);
 }

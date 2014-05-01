@@ -23,7 +23,7 @@ var StoneLeftS = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -60,7 +60,7 @@ var StoneRightS = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -96,7 +96,7 @@ var StoneT = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -132,7 +132,7 @@ var StoneLeftL = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -168,7 +168,7 @@ var StoneRightL = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -206,7 +206,7 @@ var StoneCube = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
@@ -241,7 +241,7 @@ var StoneLine = function(){
 		THREE.GeometryUtils.merge(combined_geometry, geometry3);
 		THREE.GeometryUtils.merge(combined_geometry, geometry4);
 		
-		var material = materials.getRandomMaterial();
+		var material = useSpecifiedMaterial!=null?useSpecifiedMaterial:materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		

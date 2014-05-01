@@ -1,5 +1,5 @@
 /*
- 	Materiale für Spielsteine
+ 	materials for stones
 */
 var Materials = function(){
 	var wood;
@@ -8,7 +8,7 @@ var Materials = function(){
 	var bricks;
 	var container;
 	
-	this.load = function(){
+	this.load = function(){		
 		var textureWood = new THREE.ImageUtils.loadTexture("./assets/textures/wood.jpg");
 		textureWood.repeat.x = .1;
 		textureWood.repeat.y = .1;
@@ -21,7 +21,12 @@ var Materials = function(){
 		textureMetal.repeat.y = .1;
 		textureMetal.offset.x = .0;
 		textureMetal.offset.y = .0;
-		this.metal = new THREE.MeshLambertMaterial({map: textureMetal});
+		this.metal = new THREE.MeshPhongMaterial({
+			map: textureMetal, 
+			ambient: 0x030303, 
+			specular: 0xffffff, 
+			shininess: 150
+		});
 		
 		var textureConcrete = new THREE.ImageUtils.loadTexture("./assets/textures/concrete.jpg");
 		textureConcrete.repeat.x = .09;
@@ -42,6 +47,7 @@ var Materials = function(){
 		this.container.push(this.metal);
 		this.container.push(this.concrete);
 		this.container.push(this.bricks);
+		
 	};
 
 	this.getRandomMaterial = function(){
