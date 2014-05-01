@@ -8,7 +8,8 @@ var Materials = function(){
 	var bricks;
 	var container;
 	
-	this.load = function(){		
+	this.load = function(){
+		
 		var textureWood = new THREE.ImageUtils.loadTexture("./assets/textures/wood.jpg");
 		textureWood.repeat.x = .1;
 		textureWood.repeat.y = .1;
