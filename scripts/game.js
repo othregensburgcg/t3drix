@@ -11,7 +11,20 @@ function startGame(){
 	scene.add(new StoneT().create(6.5, 3.5).mesh);
 	*/
 	
-	stone = new StoneLeftS().create(4.5, 21.5);
+	stone = nextStone();
 	scene.add(stone.mesh);
 	scene.add(new StoneLeftS().create(4.5, 0.5).mesh);
+}
+
+function nextStone(){
+	stones = new Array();
+	stones.push(new StoneLine().create(4.5, 21.5));
+	stones.push(new StoneLeftS().create(4.5, 21.5));
+	stones.push(new StoneRightS().create(4.5, 21.5));
+	stones.push(new StoneCube().create(4.5, 21.5));
+	stones.push(new StoneLeftL().create(4.5, 21.5));
+	stones.push(new StoneRightL().create(4.5, 21.5));
+	stones.push(new StoneT().create(4.5, 21.5));
+	
+	return stones[Math.floor(Math.random()*this.stones.length)];
 }
