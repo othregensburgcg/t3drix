@@ -12,7 +12,7 @@ document.onkeydown = function(evt){
 			stone.moveRight();
 			break ;
 		case 40: /* unten - taste behandeln */
-			alert("down");
+			stone.moveDown(.25);
 			break;
 		default: break;
 	}
