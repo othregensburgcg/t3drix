@@ -1,3 +1,17 @@
+var GamePositionMatrix = function(){
+	var takenFields = new Array();
+	
+	this.pushField = function(x, y){
+		this.takenFields.push(new Array(x, y));
+		return this;
+	};
+	
+	this.removeField = function(){
+		this.takenFields.push(new Array(x, y));
+		return this;		
+	};
+};
+
 var StoneLeftS = function(){
 	var mesh;
 
@@ -96,6 +110,32 @@ var StoneRightS = function(){
 				
 		return this;
 	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
+		return this;
+	};
 };
 
 var StoneT = function(){
@@ -130,6 +170,32 @@ var StoneT = function(){
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
+		return this;
+	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
 		return this;
 	};
 };
@@ -168,6 +234,32 @@ var StoneLeftL = function(){
 				
 		return this;
 	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
+		return this;
+	};
 };
 
 var StoneRightL = function(){
@@ -202,6 +294,32 @@ var StoneRightL = function(){
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
+		return this;
+	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
 		return this;
 	};
 };
@@ -242,6 +360,32 @@ var StoneCube = function(){
 				
 		return this;
 	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
+		
+		return this;
+	};
 };
 
 var StoneLine = function(){
@@ -274,6 +418,32 @@ var StoneLine = function(){
 		this.mesh.position.x = x || 5.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
+		
+		return this;
+	};
+	
+	this.moveDown = function(y){
+		this.mesh.position.y -= y;
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
+		
+		return this;
+	};
+	
+	this.rotateRight = function(z){
+		this.mesh.rotation.z -= z;
 		
 		return this;
 	};
