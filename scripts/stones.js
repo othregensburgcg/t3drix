@@ -41,13 +41,15 @@ var StoneLeftS = function(){
 	};
 	
 	this.moveRight = function(){
-		this.mesh.position.x += 1;
+		if (this.mesh.position.x < 8.5)
+			this.mesh.position.x += 1;
 		
 		return this;
 	};
 	
 	this.moveLeft = function(){
-		this.mesh.position.x -= 1;
+		if (this.mesh.position.x > 1.5)
+			this.mesh.position.x -= 1;
 		
 		return this;
 	};
