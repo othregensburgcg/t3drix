@@ -34,4 +34,8 @@ function nextStone(){
 	stones.push(new StoneT().create(4.5, 21.5));
 	
 	return stones[Math.floor(Math.random()*this.stones.length)];
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> branch 'master' of git@github.com:othregensburgcg/t3drix.git
