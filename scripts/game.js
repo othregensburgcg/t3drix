@@ -1,6 +1,9 @@
 var stone;
+var gamePositionMatrix;
 
 function startGame(){
+	gamePositionMatrix = new GamePositionMatrix().initFields();
+	
 	/*
 	scene.add(new StoneLine().create(9.5).mesh);
 	scene.add(new StoneLeftS().create(1.5).mesh);

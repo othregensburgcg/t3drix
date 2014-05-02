@@ -1,19 +1,6 @@
-var GamePositionMatrix = function(){
-	var takenFields = new Array();
-	
-	this.pushField = function(x, y){
-		this.takenFields.push(new Array(x, y));
-		return this;
-	};
-	
-	this.removeField = function(){
-		this.takenFields.push(new Array(x, y));
-		return this;		
-	};
-};
-
 var StoneLeftS = function(){
 	var mesh;
+	var gamePositionMatrix;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
