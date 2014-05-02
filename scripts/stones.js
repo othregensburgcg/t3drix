@@ -1,3 +1,8 @@
+var GameMatrix = function(){
+	
+	
+}
+
 var StoneLeftS = function(){
 	var mesh;
 
