@@ -16,4 +16,4 @@ document.onkeydown = function(evt){
 			break;
 		default: break;
 	}
-}
+};
