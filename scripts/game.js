@@ -1,4 +1,5 @@
 var stone;
+var previewStone
 
 function startGame(){
 	/*
@@ -12,12 +13,15 @@ function startGame(){
 	*/
 	
 	stone = nextStone();
+	previewStone = nextStone();
+	
 	scene.add(stone.mesh);
 	scene.add(new StoneLeftS().create(4.5, 0.5).mesh);
 }
 
 function nextStone(){
 	stones = new Array();
+	
 	stones.push(new StoneLine().create(4.5, 21.5));
 	stones.push(new StoneLeftS().create(4.5, 21.5));
 	stones.push(new StoneRightS().create(4.5, 21.5));

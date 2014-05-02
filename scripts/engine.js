@@ -73,6 +73,13 @@ function sceneAnimation(){
 	stone.moveDown(.01);
 }
 
+function renderPreviewStone(){
+	var preview = previewStone;
+	preview.mesh.position.x = 15.5;
+	preview.mesh.position.y = 15.5;
+	scene.add(preview.mesh);
+}
+
 function init(){
 	var w = window.innerWidth;
 	var h = window.innerHeight;
@@ -138,6 +145,7 @@ function init(){
 function render() {
 	requestAnimationFrame(render);
 	sceneAnimation();
+	renderPreviewStone();
 	
 	if(!composerEnabled) renderer.render(scene, camera); //use standard renderer
 	else{//use postprocessing with shaders
