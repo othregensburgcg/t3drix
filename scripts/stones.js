@@ -55,8 +55,8 @@ var StoneLeftS = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -118,8 +118,8 @@ var StoneRightS = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -180,8 +180,8 @@ var StoneT = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -242,8 +242,8 @@ var StoneLeftL = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -304,8 +304,8 @@ var StoneRightL = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -368,8 +368,8 @@ var StoneCube = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};
@@ -383,15 +383,16 @@ var StoneLine = function(){
 		var cube_geometry = new THREE.CubeGeometry(1, 1, 1);
 		
 		var geometry1 = new THREE.Mesh(cube_geometry);
+		geometry1.position.y = -1;
 		
 		var geometry2 = new THREE.Mesh(cube_geometry);
-		geometry2.position.y = 1;
+		geometry2.position.y = 0;
 		
 		var geometry3 = new THREE.Mesh(cube_geometry);
-		geometry3.position.y = 2;
+		geometry3.position.y = 1;
 		
 		var geometry4 = new THREE.Mesh(cube_geometry);
-		geometry4.position.y = 3;
+		geometry4.position.y = 2;
 		
 		THREE.GeometryUtils.merge(combined_geometry, geometry1);
 		THREE.GeometryUtils.merge(combined_geometry, geometry2);
@@ -429,8 +430,8 @@ var StoneLine = function(){
 		return this;
 	};
 	
-	this.rotateRight = function(z){
-		this.mesh.rotation.z -= z;
+	this.rotateRight = function(){
+		this.mesh.rotation.z -= Math.PI/2;
 		
 		return this;
 	};

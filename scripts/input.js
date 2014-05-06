@@ -6,7 +6,7 @@ document.onkeydown = function(evt){
 			stone.moveLeft();
 			break;
 		case 38: /* oben - taste behandeln */
-			alert("up");
+			stone.rotateRight();
 			break;
 		case 39: /* rechts - taste behandeln */
 			stone.moveRight();
