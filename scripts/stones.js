@@ -369,7 +369,7 @@ var StoneCube = function(){
 	};
 	
 	this.rotateRight = function(){
-		this.mesh.rotation.z -= Math.PI/2;
+		this.mesh.rotation.z -= 0;
 		
 		return this;
 	};
