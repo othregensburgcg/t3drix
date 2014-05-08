@@ -59,6 +59,26 @@ function addGameGrid(){
 	scene.add(grid);
 }
 
+function addFpsCounter(){
+	var stats = new Stats();
+	stats.setMode(0); // 0: fps, 1: ms
+	
+	// Align top-left
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.left = '10px';
+	stats.domElement.style.top = '108px';
+	
+	document.body.appendChild( stats.domElement );
+	
+	setInterval( function () {
+	
+	    stats.begin();
+	
+	    stats.end();
+	
+	}, 1000 / 60 );
+}
+
 function load(){
 	//Starting Point ---
 	materials = new Materials();
@@ -94,6 +114,9 @@ function init(){
 	renderer.setClearColor(0xFFFFFF, 0);
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
+	
+	//show fps
+	addFpsCounter();
 	
 	//addStandardGrid();
 	addGameGrid();
