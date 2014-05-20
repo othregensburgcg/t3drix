@@ -14,6 +14,8 @@ document.onkeydown = function(evt){
 		case 40: /* unten - taste behandeln */
 			stone.moveDown(.25);
 			break;
+		case 110:
+			placeStone();
 		default: break;
 	}
 };
