@@ -94,10 +94,7 @@ function sceneAnimation(){
 }
 
 function renderPreviewStone(){
-	var preview = previewStone;
-	preview.mesh.position.x = 15.5;
-	preview.mesh.position.y = 15.5;
-	scene.add(preview.mesh);
+	scene.add(previewStone.mesh);
 }
 
 function init(){
