@@ -1,6 +1,5 @@
 var StoneLeftS = function(){
 	var mesh;
-	var gamePositionMatrix;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -28,7 +27,7 @@ var StoneLeftS = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -91,7 +90,7 @@ var StoneRightS = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -153,7 +152,7 @@ var StoneT = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -217,7 +216,7 @@ var StoneLeftL = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -279,7 +278,7 @@ var StoneRightL = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -343,7 +342,7 @@ var StoneCube = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 				
@@ -352,6 +351,7 @@ var StoneCube = function(){
 	
 	this.moveDown = function(y){
 		this.mesh.position.y -= y;
+		console.log(this.mesh.position);
 		
 		return this;
 	};
@@ -405,7 +405,7 @@ var StoneLine = function(){
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		
-		this.mesh.position.x = x || 5.5;
+		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
 		this.mesh.position.z = 0.5;
 		
