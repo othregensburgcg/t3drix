@@ -195,16 +195,18 @@ var StoneLeftL = function(){
 		var cube_geometry = new THREE.CubeGeometry(1, 1, 1);
 		
 		var geometry1 = new THREE.Mesh(cube_geometry);
-		geometry1.position.x = -1;
+		geometry1.position.x = 1;
 		
 		var geometry2 = new THREE.Mesh(cube_geometry);
 		geometry2.position.x = 0;
 		
 		var geometry3 = new THREE.Mesh(cube_geometry);
 		geometry3.position.y = 1;
+		geometry3.position.x = 1;
 		
 		var geometry4 = new THREE.Mesh(cube_geometry);
 		geometry4.position.y = 2;
+		geometry4.position.x = 1;
 		
 		THREE.GeometryUtils.merge(combined_geometry, geometry1);
 		THREE.GeometryUtils.merge(combined_geometry, geometry2);
