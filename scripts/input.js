@@ -29,6 +29,8 @@ document.onkeydown = function(evt){
 				pause = ! pause;
 				//TESTING---------------------------------
 				//test();
+				console.log(stone.meshCollider.cubes + " -> " + stone.meshCollider.globalPosition);
+				console.log(stoppedStones[0].meshCollider.cubes + " -> " + stoppedStones[0].meshCollider.globalPosition);
 				//----------------------------------------
 				break;
 			default: break;

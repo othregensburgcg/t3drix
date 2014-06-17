@@ -36,85 +36,103 @@ var MeshCollider = function(){
 		
 		for(var i=0; i<stoppedStones.length; i++){
 
-			if(checkIfCollidesWith(stoppedStones[i])){
+			if(this.checkIfCollidesWith(stoppedStones[i])){
 				return true;
 			}
 						
 		}
 		
 		return false;
-		
-		function checkIfCollidesWith(stoneToCheck){
-			var checkCubes = stoneToCheck.meshCollider.cubes;
-
-var globalPositionCheck = stoneToCheck.meshCollider.globalPosition;
-			
-			for(var i=0; i<this.cubes.length; i++){
-				for(var k=0; k<checkCubes.length; k++){
-					var myCube = this.cubes[i];
-					var checkCube = checkCubes[k];
-					
-					//TODO: add global position
-					
-					if(checkCubesCollision(myCube, checkCube)) return true;
-				}
-			}
-			
-			return false;
-		};
-		
-		
 	};
 	
-	this.checkRotateCollision = function(){
+	this.checkIfCollidesWith = function(stoneToCheck){
+		var checkCubes = stoneToCheck.meshCollider.cubes;
+		var globalPositionCheck = stoneToCheck.meshCollider.globalPosition;
 		
+		for(var i=0; i<this.cubes.length; i++){
+			for(var k=0; k<checkCubes.length; k++){
+				
+				var myCube = this.translateCube(this.cubes[i].slice(0), this.globalPosition[0], this.globalPosition[1]);
+				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
+				
+				if(this.checkCubesCollision(myCube, checkCube)){
+					console.log("COLLISION AT:");
+					console.log(myCube);
+					console.log(checkCube);
+					
+					window["pause"] = true;
+					
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	};
+	
+	this.translateCube = function(cube, x, y){
+		for(var i=0; i<8; i++){
+			if(i%2==0) cube[i] += x;
+			else cube[i] += y;
+		}
+		return cube;
 	};
 	
 	this.checkCubesCollision = function(c1, c2){//check logic and then move complete function to MeshCollider.checkMoveCollision()
+		
+
+		return !(l(c2) >= r(c1) || 
+           r(c2) <= l(c1) || 
+           t(c2) <= b(c1) ||
+           b(c2) >= t(c1));
+		
+		
+		/*
 		var c1_center = (c1[0] + c1[2] + c1[4] + c1[6]) / 4;
 		var c2_center = (c2[0] + c2[2] + c2[4] + c2[6]) / 4;
 		
 		if(c1_center <= c2_center){
 			if(
-				(getMaxTop(c1)>getMinBottom(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-				//(getMaxTop(c1)>getMinBottom(c2) && getMinLeft(c1)<getMaxRight(c2)) ||
-				(getMinBottom(c1)<getMaxTop(c2) && getMaxRight(c1)>getMinLeft(c2))
-				//(getMinBottom(c1)<getMaxTop(c2) && getMinLeft(c1)<getMaxRight(c2))
+				(t(c1)>b(c2) && r(c1)>l(c2)) ||
+				(b(c1)<t(c2) && r(c1)>l(c2))
 			) return true;
 			else return false;
 		}
 		else{
 			if(
-				//(getMaxTop(c1)>getMinBottom(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-				(getMaxTop(c1)>getMinBottom(c2) && getMinLeft(c1)<getMaxRight(c2)) ||
-				//(getMinBottom(c1)<getMaxTop(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-				(getMinBottom(c1)<getMaxTop(c2) && getMinLeft(c1)<getMaxRight(c2))
+				(t(c1)>b(c2) && l(c1)<r(c2)) ||
+				(b(c1)<t(c2) && l(c1)<r(c2))
 			) return true;
 			else return false;
-		}			
+		}
+		*/
 		
-		function getMaxTop(cube){
+		function t(cube){
 			var max = -1000;
 			for(var i=1; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
 			return max;
 		};
 		
-		function getMinBottom(cube){
+		function b(cube){
 			var min = 1000;
 			for(var i=1; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
 			return min;
 		};
 		
-		function getMinLeft(cube){
+		function l(cube){
 			var min = 1000;
 			for(var i=0; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
 			return min;
 		};
 		
-		function getMaxRight(cube){
+		function r(cube){
 			var max = -1000;
 			for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
 			return max;
 		};
+	};
+	
+	this.checkRotateCollision = function(){
+		
 	};
 };
