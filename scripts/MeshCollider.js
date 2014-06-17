@@ -46,6 +46,8 @@ var MeshCollider = function(){
 		
 		function checkIfCollidesWith(stoneToCheck){
 			var checkCubes = stoneToCheck.meshCollider.cubes;
+
+var globalPositionCheck = stoneToCheck.meshCollider.globalPosition;
 			
 			for(var i=0; i<this.cubes.length; i++){
 				for(var k=0; k<checkCubes.length; k++){
