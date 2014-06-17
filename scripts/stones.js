@@ -53,9 +53,17 @@ var StoneLeftS = function(){
 	};
 	
 	this.moveRight = function(){
-		if (this.mesh.position.x < 8.5)
+		//TODO: check collisions
+		
+		if (this.mesh.position.x < 8.5){
 			this.mesh.position.x += 1;
 			
+			if(this.meshCollider.checkMoveCollision()){
+				this.mesh.position.x -= 1;
+			
+			}
+		}		
+		
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;

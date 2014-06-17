@@ -28,68 +28,10 @@ document.onkeydown = function(evt){
 				//console.log(stone.mesh.position);
 				pause = ! pause;
 				//TESTING---------------------------------
-				test();
+				//test();
 				//----------------------------------------
 				break;
 			default: break;
 		}
 	}
-};
-
-function test(){
-	
-	var myCube = new Array(2,5,4,5,2,3,4,3);
-	var checkCube = new Array(7,6,9,6,7,8,9,8);
-	
-	console.log(checkCubesCollision(myCube, checkCube));
-				
-};
-
-function checkCubesCollision(c1, c2){//check logic and then move complete function to MeshCollider.checkMoveCollision()
-	var c1_center = (c1[0] + c1[2] + c1[4] + c1[6]) / 4;
-	var c2_center = (c2[0] + c2[2] + c2[4] + c2[6]) / 4;
-	
-	if(c1_center <= c2_center){
-		if(
-			(getMaxTop(c1)>getMinBottom(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-			//(getMaxTop(c1)>getMinBottom(c2) && getMinLeft(c1)<getMaxRight(c2)) ||
-			(getMinBottom(c1)<getMaxTop(c2) && getMaxRight(c1)>getMinLeft(c2))
-			//(getMinBottom(c1)<getMaxTop(c2) && getMinLeft(c1)<getMaxRight(c2))
-		) return true;
-		else return false;
-	}
-	else{
-		if(
-			//(getMaxTop(c1)>getMinBottom(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-			(getMaxTop(c1)>getMinBottom(c2) && getMinLeft(c1)<getMaxRight(c2)) ||
-			//(getMinBottom(c1)<getMaxTop(c2) && getMaxRight(c1)>getMinLeft(c2)) ||
-			(getMinBottom(c1)<getMaxTop(c2) && getMinLeft(c1)<getMaxRight(c2))
-		) return true;
-		else return false;
-	}
-	
-	
-	function getMaxTop(cube){
-		var max = -1000;
-		for(var i=1; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
-		return max;
-	};
-	
-	function getMinBottom(cube){
-		var min = 1000;
-		for(var i=1; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
-		return min;
-	};
-	
-	function getMinLeft(cube){
-		var min = 1000;
-		for(var i=0; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
-		return min;
-	};
-	
-	function getMaxRight(cube){
-		var max = -1000;
-		for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
-		return max;
-	};
 };
