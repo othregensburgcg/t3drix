@@ -1,6 +1,7 @@
 var StoneLeftS = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -79,8 +80,9 @@ var StoneLeftS = function(){
 };
 
 var StoneRightS = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -160,8 +162,9 @@ var StoneRightS = function(){
 };
 
 var StoneT = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -237,8 +240,9 @@ var StoneT = function(){
 };
 
 var StoneLeftL = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -316,8 +320,9 @@ var StoneLeftL = function(){
 };
 
 var StoneRightL = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -393,8 +398,9 @@ var StoneRightL = function(){
 };
 
 var StoneCube = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();
@@ -469,8 +475,9 @@ var StoneCube = function(){
 };
 
 var StoneLine = function(){
-	var mesh;	
-	var meshCollider;
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
 
 	this.create = function(x, y){
 		var combined_geometry = new THREE.Geometry();

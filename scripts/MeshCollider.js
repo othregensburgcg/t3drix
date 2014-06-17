@@ -31,5 +31,36 @@ var MeshCollider = function(){
 		    return new THREE.Vector3(Math.round((inPoint.x+center_x)*10)/10, Math.round((inPoint.y+center_y)*10)/10, 0);
 		};
 	};
+	
+	this.checkMoveCollision = function(){
+		
+		for(var i=0; i<stoppedStones.length; i++){
 
+			if(checkIfCollidesWith(stoppedStones[i])){
+				return true;
+			}
+						
+		}
+		
+		return false;
+		
+		function checkIfCollidesWith(stoneToCheck){
+			var checkCubes = stoneToCheck.meshCollider.cubes;
+			
+			for(var i=0; i<this.cubes.length; i++){
+				for(var k=0; k<checkCubes.length; k++){
+					var myCube = this.cubes[i];
+					var checkCube = checkCubes[k];
+					
+					//if(checkCubesCollision(myCube, checkCube)) return true;
+				}
+			}
+			
+			return false;
+		};
+	};
+	
+	this.checkRotateCollision = function(){
+		
+	};
 };
