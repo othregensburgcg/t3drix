@@ -7,6 +7,8 @@ var useSpecifiedMaterial;
 var grid, axis;
 var materials;
 
+var pause = false;
+
 var example_object;
 
 function addStandardGrid(){
@@ -83,14 +85,17 @@ function load(){
 	//Starting Point ---
 	materials = new Materials();
 	materials.load();
-	useSpecifiedMaterial = null;//materials.??? or null for testing materials on all stones
+	useSpecifiedMaterial = materials.concrete;//null;//materials.??? or null for testing materials on all stones
     init();
     render();
 }
 
 function sceneAnimation(){
 	//example_object.mesh.rotation.y += 0.01;
-	stone.moveDown(.01);
+	if(! pause){
+		stone.moveDown(.01);
+	}
+	
 }
 
 function renderPreviewStone(){
@@ -106,7 +111,6 @@ function init(){
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
-	
 	
 	renderer.setClearColor(0xFFFFFF, 0);
 	renderer.setSize(w, h);

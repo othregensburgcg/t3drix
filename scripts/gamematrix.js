@@ -8,6 +8,7 @@ var GamePositionMatrix = function(){
 		return this;
 	};
 	
+	/*
 	this.occupy(obj){
 		if(obj instanceof StoneLeftS){
 			
@@ -25,4 +26,5 @@ var GamePositionMatrix = function(){
 			
 		}
 	};
+	*/
 };

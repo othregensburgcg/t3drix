@@ -6,6 +6,7 @@ var Materials = function(){
 	var concrete;
 	var metal;
 	var bricks;
+	
 	var container;
 	
 	this.load = function(){
