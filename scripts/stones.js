@@ -444,7 +444,6 @@ var StoneCube = function(){
 	
 	this.moveDown = function(y){
 		this.mesh.position.y -= y;
-		console.log(this.mesh.position);
 		
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
