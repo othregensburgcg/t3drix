@@ -88,7 +88,11 @@ var MeshCollider = function(){
 					//console.log(myCube);
 					//console.log(checkCube);
 					
-					
+					if(this.globalPosition[1]>17.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
+						GAMEOVER = true;
+						pause = true;
+						alert("GAME OVER at" + this.globalPosition[0]);
+					}					
 					//---------------------------------------------------
 					
 					return true;

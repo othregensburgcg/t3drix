@@ -8,13 +8,14 @@ document.onkeydown = function(evt){
 	
 	//console.log(evt.keyCode);
 	
-	if(evt.keyCode == 27 && pause){
+	if(evt.keyCode == 27 && pause && !GAMEOVER){
 		pause = ! pause;
 	}
-	else if(!pause){
+	else if(!pause && !GAMEOVER){
 		switch(evt.keyCode){
 			case 37: /* links - taste behandeln */
 				if(!leftForbidden) stone.moveLeft();
+				else setTimeout(function(){ leftForbidden = false; }, 400);
 				break;
 			case 38: /* oben - taste behandeln */
 				if(!rotateForbidden){
@@ -25,6 +26,7 @@ document.onkeydown = function(evt){
 				break;
 			case 39: /* rechts - taste behandeln */
 				if(!rightForbidden) stone.moveRight();
+				else setTimeout(function(){ rightForbidden = false; }, 400);
 				break ;
 			case 40: /* unten - taste behandeln */
 				stone.moveDown(.25);

@@ -8,6 +8,7 @@ var grid, axis;
 var materials;
 
 var pause = false;
+var GAMEOVER = false;
 
 var example_object;
 
@@ -56,7 +57,7 @@ function addGameGrid(){
 	gridgeometry.vertices.push(new THREE.Vector3(0, 0, 1));
 	gridgeometry.vertices.push(new THREE.Vector3(10, 0, 1));
 
-	var gridmaterial = new THREE.LineBasicMaterial({color: 0xFF0000});
+	var gridmaterial = new THREE.LineBasicMaterial({color: 0xEEEEEE});
 	grid = new THREE.Line(gridgeometry, gridmaterial, THREE.LinePieces);
 	scene.add(grid);
 }
@@ -85,7 +86,7 @@ function load(){
 	//Starting Point ---
 	materials = new Materials();
 	materials.load();
-	useSpecifiedMaterial = null;//materials.concrete or null for testing materials on all stones
+	useSpecifiedMaterial = materials.bricks;//null;//materials.concrete or null for testing materials on all stones
     init();
     render();
 }
@@ -96,17 +97,9 @@ function sceneAnimation(){
 		stone.moveDown(.01);
 		if(stone.stopped){
 			stoppedStones.push(stone);
-			
-			placeStone();
-		
+			if(!GAMEOVER) placeStone();
 		}
-		
 	}
-	
-}
-
-function renderPreviewStone(){
-	scene.add(previewStone.mesh);
 }
 
 function init(){
@@ -123,17 +116,8 @@ function init(){
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
 	
-	//show fps
 	addFpsCounter();
-	
-	//addStandardGrid();
 	addGameGrid();
-
-	/*example_object = new StoneLine();
-	example_object.create();
-	scene.add(example_object.mesh);
-	*/
-	
 	startGame();
 	
 	var light = new THREE.PointLight(0xffffff, .9, 0.0);//color, intensity, distance
@@ -176,7 +160,6 @@ function init(){
 function render() {
 	requestAnimationFrame(render);
 	sceneAnimation();
-	renderPreviewStone();
 	
 	if(!composerEnabled) renderer.render(scene, camera); //use standard renderer
 	else{//use postprocessing with shaders

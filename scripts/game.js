@@ -8,12 +8,15 @@ var stoppedStones;
 
 function startGame() {
 	
+	GAMEOVER = false;
+	
 	stone = nextStone();
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
 	scene.add(stone.mesh);
 
 	previewStone = nextStone();
+	scene.add(previewStone.mesh);
 
 	stoppedStones = new Array();
 	
@@ -24,13 +27,19 @@ function startGame() {
 }
 
 function placeStone() {
-
+	console.log(stone.mesh.position);
 	stone = previewStone;
-	
-	
 	stone.mesh.position.x = 4.5;
-	stone.mesh.position.y = 21.5;
-	
+	stone.mesh.position.y = 19.5;
+	/*
+	setTimeOut(function(){
+		if(stone.stopped){
+			GAMEOVER = true;
+			pause = true;
+			alert("GAME OVER");
+		}
+	}, 100);
+	*/
 	previewStone = nextStone();
 	scene.add(previewStone.mesh);
 	
