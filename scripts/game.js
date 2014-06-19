@@ -2,6 +2,8 @@ var stone;
 var gamePositionMatrix;
 var previewStone;
 
+var pauseAfterCollision = true;
+
 var stones;
 
 var stoppedStones;
@@ -25,17 +27,22 @@ function startGame() {
 
 	previewStone = nextStone();
 
-
 	stoppedStones = new Array();
+	
 	var firstStone = new StoneLeftS().create(4.5, 0.5);
 	stoppedStones.push(firstStone);
 	scene.add(firstStone.mesh);
 	
+	var bounds = new Bounds().create();
+	stoppedStones.push(bounds);
+	scene.add(bounds.mesh);
+	
 }
 
 function placeStone() {
+	
 	//remove moving
-	scene.remove(stone.mesh);
+	//scene.remove(stone.mesh);
 	//add Static
 
 	//add preview as stone (changed coord to the start positon)
@@ -44,7 +51,8 @@ function placeStone() {
 	stone.mesh.position.y = 21.5;
 
 	previewStone = nextStone();
-	scene.add(stonelmesh);
+	scene.add(stone.mesh);
+	
 }
 
 function nextStone() {

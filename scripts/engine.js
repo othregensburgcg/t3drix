@@ -94,6 +94,13 @@ function sceneAnimation(){
 	//example_object.mesh.rotation.y += 0.01;
 	if(! pause){
 		stone.moveDown(.01);
+		if(stone.stopped){
+			stoppedStones.push(stone);
+			
+			placeStone();
+		
+		}
+		
 	}
 	
 }

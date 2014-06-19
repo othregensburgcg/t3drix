@@ -52,6 +52,7 @@ var MeshCollider = function(){
 		for(var i=0; i<this.cubes.length; i++){
 			for(var k=0; k<checkCubes.length; k++){
 				
+				//slice arrays to get a copy
 				var myCube = this.translateCube(this.cubes[i].slice(0), this.globalPosition[0], this.globalPosition[1]);
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
@@ -60,7 +61,7 @@ var MeshCollider = function(){
 					console.log(myCube);
 					console.log(checkCube);
 					
-					window["pause"] = true;
+					//;
 					
 					return true;
 				}
@@ -72,20 +73,35 @@ var MeshCollider = function(){
 	
 	this.translateCube = function(cube, x, y){
 		for(var i=0; i<8; i++){
-			if(i%2==0) cube[i] += x;
-			else cube[i] += y;
+			if(i%2==0) cube[i] = Math.round((cube[i] + x)*10)/10;
+			else cube[i] = Math.round((cube[i] + y)*10)/10;
 		}
 		return cube;
 	};
 	
 	this.checkCubesCollision = function(c1, c2){//check logic and then move complete function to MeshCollider.checkMoveCollision()
 		
-
+		return (
+			( l(c2)>l(c1)&&l(c2)<r(c1)&&
+			  t(c2)>b(c1)&&t(c2)<t(c1) ) ||
+			( l(c2)>l(c1)&&l(c2)<r(c1)&&
+			  b(c2)>b(c1)&&b(c2)<t(c1) ) ||
+			( r(c2)>l(c1)&&r(c2)<r(c1)&&
+			  b(c2)>b(c1)&&b(c2)<t(c1) ) ||
+			( r(c2)>l(c1)&&r(c2)<r(c1)&&
+			  t(c2)>b(c1)&&t(c2)<t(c1) ) ||
+			( l(c2)==l(c1)&&r(c2)==r(c1)&&
+			  t(c1)>b(c2)&&t(c1)<t(c2) ) ||
+			( l(c2)==l(c1)&&r(c2)==r(c1)&&
+			  t(c2)>b(c1)&&t(c2)<t(c1) )
+		);
+		
+		/*
 		return !(l(c2) >= r(c1) || 
            r(c2) <= l(c1) || 
            t(c2) <= b(c1) ||
            b(c2) >= t(c1));
-		
+		*/
 		
 		/*
 		var c1_center = (c1[0] + c1[2] + c1[4] + c1[6]) / 4;
