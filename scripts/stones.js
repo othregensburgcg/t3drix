@@ -35,7 +35,7 @@ var Bounds = function(){
 };
 
 var StoneLeftS = function(){
-	this.mesh;	
+	this.mesh;
 	this.meshCollider;
 	this.stopped = false;
 

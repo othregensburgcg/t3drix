@@ -4,22 +4,10 @@ var previewStone;
 
 var pauseAfterCollision = false;
 
-var stones;
-
 var stoppedStones;
 
 function startGame() {
-	gamePositionMatrix = new GamePositionMatrix().initFields();
 	
-	stones = new Array();
-	stones.push(new StoneLine().create(15.5, 15.5));
-	stones.push(new StoneLeftS().create(15.5, 15.5));
-	stones.push(new StoneRightS().create(15.5, 15.5));
-	stones.push(new StoneCube().create(15.5, 15.5));
-	stones.push(new StoneLeftL().create(15.5, 15.5));
-	stones.push(new StoneRightL().create(15.5, 15.5));
-	stones.push(new StoneT().create(15.5, 15.5));
-
 	stone = nextStone();
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
@@ -29,10 +17,6 @@ function startGame() {
 
 	stoppedStones = new Array();
 	
-	var firstStone = new StoneLeftS().create(4.5, 0.5);
-	stoppedStones.push(firstStone);
-	scene.add(firstStone.mesh);
-	
 	var bounds = new Bounds().create();
 	stoppedStones.push(bounds);
 	scene.add(bounds.mesh);
@@ -40,22 +24,28 @@ function startGame() {
 }
 
 function placeStone() {
-	
-	//remove moving
-	//scene.remove(stone.mesh);
-	//add Static
 
-	//add preview as stone (changed coord to the start positon)
-	stone = deepCopy(previewStone);
+	stone = previewStone;
+	
+	
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
-	//scene.add(stone.mesh);
-
-	//previewStone = nextStone();
 	
+	previewStone = nextStone();
+	scene.add(previewStone.mesh);
 	
 }
 
 function nextStone() {
-	return stones[Math.floor(Math.random() * this.stones.length)];
+	var rand = Math.floor(Math.random() * 7);
+	switch(rand){
+		case 0: return new StoneLine().create(15.5, 15.5); break;
+		case 1: return new StoneLeftS().create(15.5, 15.5); break;
+		case 2: return new StoneCube().create(15.5, 15.5); break;
+		case 3: return new StoneLeftL().create(15.5, 15.5); break;
+		case 4: return new StoneRightS().create(15.5, 15.5); break;
+		case 5: return new StoneRightL().create(15.5, 15.5); break;
+		case 6: return new StoneT().create(15.5, 15.5); break;		
+		default: return null; break;
+	}
 }
