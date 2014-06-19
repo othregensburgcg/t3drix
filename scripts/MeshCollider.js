@@ -84,11 +84,12 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
-					console.log("COLLISION AT:");
-					console.log(myCube);
-					console.log(checkCube);
+					console.log("COLLISION");
+					//console.log(myCube);
+					//console.log(checkCube);
 					
-					//;
+					
+					//---------------------------------------------------
 					
 					return true;
 				}

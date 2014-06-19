@@ -85,7 +85,7 @@ function load(){
 	//Starting Point ---
 	materials = new Materials();
 	materials.load();
-	useSpecifiedMaterial = materials.concrete;//null;//materials.??? or null for testing materials on all stones
+	useSpecifiedMaterial = null;//materials.concrete or null for testing materials on all stones
     init();
     render();
 }

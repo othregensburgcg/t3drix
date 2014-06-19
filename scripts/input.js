@@ -1,3 +1,7 @@
+var leftForbidden = false;
+var rightForbidden = false;
+var rotateForbidden = false;
+
 document.onkeydown = function(evt){
 	evt = evt || window.event;
 	evt.preventDefault();
@@ -7,16 +11,20 @@ document.onkeydown = function(evt){
 	if(evt.keyCode == 27 && pause){
 		pause = ! pause;
 	}
-	else if(! pause){
+	else if(!pause){
 		switch(evt.keyCode){
 			case 37: /* links - taste behandeln */
-				stone.moveLeft();
+				if(!leftForbidden) stone.moveLeft();
 				break;
 			case 38: /* oben - taste behandeln */
-				stone.rotateRight();
+				if(!rotateForbidden){
+					rotateForbidden = true;
+					stone.rotateRight();
+				}
+				setTimeout(function(){ rotateForbidden = false; }, 400);
 				break;
 			case 39: /* rechts - taste behandeln */
-				stone.moveRight();
+				if(!rightForbidden) stone.moveRight();
 				break ;
 			case 40: /* unten - taste behandeln */
 				stone.moveDown(.25);

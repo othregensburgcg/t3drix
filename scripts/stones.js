@@ -82,26 +82,30 @@ var StoneLeftS = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
 				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -111,12 +115,14 @@ var StoneLeftS = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -184,26 +190,30 @@ var StoneRightS = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -213,12 +223,14 @@ var StoneRightS = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -282,26 +294,30 @@ var StoneT = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -311,12 +327,14 @@ var StoneT = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -396,12 +414,14 @@ var StoneLeftL = function(){
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -411,12 +431,14 @@ var StoneLeftL = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -480,26 +502,30 @@ var StoneRightL = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -509,12 +535,14 @@ var StoneRightL = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -580,26 +608,30 @@ var StoneCube = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -609,12 +641,14 @@ var StoneCube = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;
@@ -672,26 +706,30 @@ var StoneLine = function(){
 	};
 	
 	this.moveDown = function(y){
-		this.mesh.position.y -= y;
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-				this.mesh.position.y += y;
+				y = 0;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
+		this.mesh.position.y -= y;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
 	};
 	
 	this.moveRight = function(){
+		leftForbidden = false;
 		
 		var delta = 1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			rightForbidden = true;
 		}		
 		
 		this.mesh.position.x += delta;
@@ -701,12 +739,14 @@ var StoneLine = function(){
 	};
 	
 	this.moveLeft = function(){
+		rightForbidden = false;
 		
 		var delta = -1;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
 			delta = 0;
+			leftForbidden = true;
 		}
 		
 		this.mesh.position.x += delta;

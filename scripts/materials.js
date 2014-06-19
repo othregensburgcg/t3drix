@@ -25,7 +25,7 @@ var Materials = function(){
 		textureMetal.offset.y = .0;
 		this.metal = new THREE.MeshPhongMaterial({
 			map: textureMetal, 
-			ambient: 0x030303, 
+			ambient: 0x333333, 
 			specular: 0xffffff, 
 			shininess: 150
 		});
