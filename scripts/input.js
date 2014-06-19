@@ -2,6 +2,34 @@ var leftForbidden = false;
 var rightForbidden = false;
 var rotateForbidden = false;
 
+document.onkeyup = function(evt){
+	evt = evt || window.event;
+	evt.preventDefault();
+	
+	//console.log(evt.keyCode);
+	
+	if(!GAMEOVER){
+		switch(evt.keyCode){
+			case 37: /* links - taste behandeln */
+				if(!leftForbidden) stone.moveLeft();
+				else setTimeout(function(){ leftForbidden = false; }, 400);
+				break;
+			case 38:
+				if(!rotateForbidden){
+					rotateForbidden = true;
+					stone.rotateRight();
+				}
+				setTimeout(function(){ rotateForbidden = false; }, 400);
+				break;
+			case 39: /* rechts - taste behandeln */
+				if(!rightForbidden) stone.moveRight();
+				else setTimeout(function(){ rightForbidden = false; }, 400);
+				break ;
+			default: break;
+		}
+	}
+};
+
 document.onkeydown = function(evt){
 	evt = evt || window.event;
 	evt.preventDefault();
@@ -13,22 +41,25 @@ document.onkeydown = function(evt){
 	}
 	else if(!pause && !GAMEOVER){
 		switch(evt.keyCode){
-			case 37: /* links - taste behandeln */
+			/*
+			case 37:
 				if(!leftForbidden) stone.moveLeft();
 				else setTimeout(function(){ leftForbidden = false; }, 400);
 				break;
-			case 38: /* oben - taste behandeln */
+			
+			case 38:
 				if(!rotateForbidden){
 					rotateForbidden = true;
 					stone.rotateRight();
 				}
 				setTimeout(function(){ rotateForbidden = false; }, 400);
 				break;
-			case 39: /* rechts - taste behandeln */
+			case 39:
 				if(!rightForbidden) stone.moveRight();
 				else setTimeout(function(){ rightForbidden = false; }, 400);
 				break ;
-			case 40: /* unten - taste behandeln */
+			*/
+			case 40:
 				stone.moveDown(.25);
 				break;
 			case 110:
