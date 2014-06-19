@@ -2,7 +2,7 @@ var stone;
 var gamePositionMatrix;
 var previewStone;
 
-var pauseAfterCollision = true;
+var pauseAfterCollision = false;
 
 var stones;
 

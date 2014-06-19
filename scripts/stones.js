@@ -13,7 +13,7 @@ var Bounds = function(){
 		for(var i=-10.5; i<10.5; i++) this.addCube(-5.5, i);//left line
 		for(var i=-10.5; i<10.5; i++) this.addCube(5.5, i);//right line
 		
-		var material = useSpecifiedMaterial || materials.getRandomMaterial();
+		var material = materials.concrete;
 		
 		this.mesh = new THREE.Mesh(this.combined_geometry, material);
 		
@@ -87,7 +87,7 @@ var StoneLeftS = function(){
 		if(this.meshCollider.checkMoveCollision()){
 				this.mesh.position.y += y;
 				this.stopped = true;
-				if(pauseAfterCollision) window["pause"] = true;	
+				if(pauseAfterCollision) window["pause"] = true;
 		}
 		
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
@@ -97,12 +97,14 @@ var StoneLeftS = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -110,12 +112,14 @@ var StoneLeftS = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -195,12 +199,14 @@ var StoneRightS = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -208,12 +214,14 @@ var StoneRightS = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -289,12 +297,14 @@ var StoneT = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -302,12 +312,14 @@ var StoneT = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -385,12 +397,14 @@ var StoneLeftL = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -398,12 +412,14 @@ var StoneLeftL = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -479,12 +495,14 @@ var StoneRightL = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -492,12 +510,14 @@ var StoneRightL = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -575,12 +595,14 @@ var StoneCube = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -588,12 +610,14 @@ var StoneCube = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -663,12 +687,14 @@ var StoneLine = function(){
 	
 	this.moveRight = function(){
 		
-		this.mesh.position.x += 1;
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x -= 1;			
+			delta = 0;
 		}		
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
@@ -676,12 +702,14 @@ var StoneLine = function(){
 	
 	this.moveLeft = function(){
 		
-		this.mesh.position.x -= 1;
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
 		
 		if(this.meshCollider.checkMoveCollision()){
-			this.mesh.position.x += 1;			
+			delta = 0;
 		}
 		
+		this.mesh.position.x += delta;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
 		
 		return this;
