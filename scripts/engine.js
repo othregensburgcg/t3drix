@@ -97,7 +97,7 @@ function sceneAnimation(){
 		if(stone.stopped){
 			stoppedStones.push(stone);
 			
-			placeStone();
+			//placeStone();
 		
 		}
 		

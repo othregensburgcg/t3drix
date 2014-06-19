@@ -124,7 +124,9 @@ var StoneLeftS = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};
@@ -220,7 +222,9 @@ var StoneRightS = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};
@@ -312,7 +316,9 @@ var StoneT = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};
@@ -406,7 +412,9 @@ var StoneLeftL = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};
@@ -498,7 +506,9 @@ var StoneRightL = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};
@@ -680,7 +690,9 @@ var StoneLine = function(){
 	this.rotateRight = function(){
 		this.mesh.rotation.z -= Math.PI/2;
 		
-		this.meshCollider.rotateRight();
+		if(this.meshCollider.checkRotateCollision()){
+			this.mesh.rotation.z += Math.PI/2;
+		}
 		
 		return this;
 	};

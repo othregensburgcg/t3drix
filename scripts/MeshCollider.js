@@ -13,23 +13,50 @@ var MeshCollider = function(){
 		this.globalPosition = new Array(x, y);
 	};
 	
-	this.rotateRight = function(){
+	this.rotateRight = function(angle){
+		
+		//console.log(this.cubes[0] + " -> " + this.globalPosition);
 		
 		for(var i=0; i<this.cubes.length; i++){
-			for(var k=0; k<8; k+=2) rotatePointAroundPoint(this.cubes[i][k], this.cubes[i][k+1], this.globalPosition[0], this.globalPosition[1]);//x, y, center_x, center_y
+			for(var k=0; k<8; k+=2){
+				//var rotated = rotatePointAroundPoint(this.cubes[i][k], this.cubes[i][k+1], this.globalPosition[0], this.globalPosition[1]);//WRONG, center is 0,0
+				var rotated = rotatePointAroundPoint(this.cubes[i][k], this.cubes[i][k+1], 0, 0, angle);//x, y, center_x, center_y
+				this.cubes[i][k] = rotated.x;
+				this.cubes[i][k+1] = rotated.y;
+			}
 		}
 		
-		function rotatePointAroundPoint(x, y, center_x, center_y) {
+		//console.log(this.cubes[0] + " -> " + this.globalPosition);
+		
+		function rotatePointAroundPoint(x, y, center_x, center_y, angle) {
 
 			var inPoint = new THREE.Vector3(x-center_x, y-center_y, 0);
 				
 		    rotMatrix = new THREE.Matrix4();
-		    rotMatrix.makeRotationAxis(new THREE.Vector3(0, 0, 1).normalize(), -Math.PI/2);
+		    rotMatrix.makeRotationAxis(new THREE.Vector3(0, 0, 1).normalize(), -(angle*Math.PI/180));
 			
 			inPoint.applyMatrix4(rotMatrix);		    
 		    
 		    return new THREE.Vector3(Math.round((inPoint.x+center_x)*10)/10, Math.round((inPoint.y+center_y)*10)/10, 0);
 		};
+	};
+	
+	this.checkRotateCollision = function(){
+		this.rotateRight(45);
+		
+		if(this.checkMoveCollision()){
+			this.rotateRight(-45);
+			return true;
+		}
+		else{
+			this.rotateRight(45);
+			
+			if(this.checkMoveCollision()){
+				this.rotateRight(-90);
+				return true;
+			}
+			else return false;
+		}		
 	};
 	
 	this.checkMoveCollision = function(){
@@ -82,46 +109,22 @@ var MeshCollider = function(){
 	this.checkCubesCollision = function(c1, c2){//check logic and then move complete function to MeshCollider.checkMoveCollision()
 		
 		return (
-			( l(c2)>l(c1)&&l(c2)<r(c1)&&
-			  t(c2)>b(c1)&&t(c2)<t(c1) ) ||
-			( l(c2)>l(c1)&&l(c2)<r(c1)&&
-			  b(c2)>b(c1)&&b(c2)<t(c1) ) ||
-			( r(c2)>l(c1)&&r(c2)<r(c1)&&
-			  b(c2)>b(c1)&&b(c2)<t(c1) ) ||
-			( r(c2)>l(c1)&&r(c2)<r(c1)&&
-			  t(c2)>b(c1)&&t(c2)<t(c1) ) ||
-			( l(c2)==l(c1)&&r(c2)==r(c1)&&
-			  t(c1)>b(c2)&&t(c1)<t(c2) ) ||
-			( l(c2)==l(c1)&&r(c2)==r(c1)&&
-			  t(c2)>b(c1)&&t(c2)<t(c1) )
+			( l(c1)==l(c2)&&r(c1)==r(c2)&&b(c1)<t(c2)&&b(c1)>b(c2) ) ||
+			( r(c1)>l(c2)&&r(c1)<r(c2) &&
+				(
+					( t(c1)<t(c2)&&t(c1)<b(c2) ) ||
+					( b(c1)<t(c2)&&b(c1)>b(c2) ) ||
+					( t(c1)==t(c2)&&b(c1)==b(c2) )
+				)
+			) ||
+			( l(c1)<r(c2)&&l(c1)>l(c2) &&
+				(
+					( t(c1)<t(c2)&&t(c1)>b(c2) ) ||
+					( t(c1)==t(c2)&&b(c1)==b(c2) ) ||
+					( b(c1)<t(c2)&&b(c1)>b(c2) )
+				)				
+			)
 		);
-		
-		/*
-		return !(l(c2) >= r(c1) || 
-           r(c2) <= l(c1) || 
-           t(c2) <= b(c1) ||
-           b(c2) >= t(c1));
-		*/
-		
-		/*
-		var c1_center = (c1[0] + c1[2] + c1[4] + c1[6]) / 4;
-		var c2_center = (c2[0] + c2[2] + c2[4] + c2[6]) / 4;
-		
-		if(c1_center <= c2_center){
-			if(
-				(t(c1)>b(c2) && r(c1)>l(c2)) ||
-				(b(c1)<t(c2) && r(c1)>l(c2))
-			) return true;
-			else return false;
-		}
-		else{
-			if(
-				(t(c1)>b(c2) && l(c1)<r(c2)) ||
-				(b(c1)<t(c2) && l(c1)<r(c2))
-			) return true;
-			else return false;
-		}
-		*/
 		
 		function t(cube){
 			var max = -1000;
@@ -146,9 +149,5 @@ var MeshCollider = function(){
 			for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
 			return max;
 		};
-	};
-	
-	this.checkRotateCollision = function(){
-		
 	};
 };

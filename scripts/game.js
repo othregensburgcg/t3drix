@@ -46,12 +46,13 @@ function placeStone() {
 	//add Static
 
 	//add preview as stone (changed coord to the start positon)
-	stone = previewStone;
+	stone = deepCopy(previewStone);
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
+	//scene.add(stone.mesh);
 
-	previewStone = nextStone();
-	scene.add(stone.mesh);
+	//previewStone = nextStone();
+	
 	
 }
 
