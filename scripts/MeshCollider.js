@@ -72,6 +72,40 @@ var MeshCollider = function(){
 		return false;
 	};
 	
+	this.checkLineFull = function(){
+		
+		
+		for(var i=0; i<this.cubes.length; i++){
+
+			if(! this.checkIfCubeCollided(this.cubes[i])){
+				return false;
+			}						
+		}
+		
+		return true;
+	};
+	
+	this.checkIfCubeCollided = function(cubeToCheck){
+		
+		for(var i=0; i<stoppedStones.length; i++){
+			var stoneToCheck = stoppedStones[i].meshCollider;
+			
+			for(var k=0; k<stoneToCheck.cubes.length; k++){
+				
+				var myCube = this.translateCube(cubeToCheck.slice(0), this.globalPosition[0], this.globalPosition[1]);
+				var checkCube = this.translateCube(stoneToCheck.cubes[k].slice(0), stoneToCheck.globalPosition[0], stoneToCheck.globalPosition[1]);
+				
+				if(this.checkCubesCollision(myCube, checkCube)){
+					
+					return true;
+				}
+			}
+		}
+		
+		return false;
+		
+	};
+	
 	this.checkIfCollidesWith = function(stoneToCheck){
 		var checkCubes = stoneToCheck.meshCollider.cubes;
 		var globalPositionCheck = stoneToCheck.meshCollider.globalPosition;
@@ -84,9 +118,9 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
-					console.log("COLLISION AT:");
-					console.log(myCube);
-					console.log(checkCube);
+					//console.log("COLLISION AT:");
+					//console.log(myCube);
+					//console.log(checkCube);
 					
 					if(this.globalPosition[1]>17.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;

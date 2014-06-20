@@ -5,9 +5,10 @@ var previewStone;
 var pauseAfterCollision = false;
 
 var stoppedStones;
+var lines = new Array();
 
-var LEVEL = 2;
-var POINTS = 100;
+var LEVEL = 1;
+var POINTS = 0;
 
 var GUI;
 
@@ -29,26 +30,36 @@ function startGame() {
 	stoppedStones.push(bounds);
 	scene.add(bounds.mesh);
 	
+	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
+	
+	
 	drawGUI();
 	
+}
+
+function checkLines(){	
+	
+	for(var i=0; i<=19; i++){
+		if(lines[i].meshCollider.checkLineFull()) console.log("LINE " + (i+1) + " FULL!");
+	}
 }
 
 function drawGUI(){
 	var gui_text = document.createElement('div');
 	gui_text.id = "gui_text";
 	gui_text.style.position = 'absolute';
-	//gui_text.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
+
 	gui_text.style.width = 100;
 	gui_text.style.height = 100;
-	//gui_text.style.backgroundColor = "blue";
+
 	gui_text.style.color = "white";
 	gui_text.style.fontSize = "60px";
 	gui_text.style.fontWeight = "bold";
 	
 	gui_text.innerHTML = "level 1<br />0 points";
 	
-	gui_text.style.top = 200 + 'px';
-	gui_text.style.left = 200 + 'px';
+	gui_text.style.top = 300 + 'px';
+	gui_text.style.left = 300 + 'px';
 	document.body.appendChild(gui_text);
 	
 	GUI = document.getElementById('gui_text');
@@ -59,19 +70,11 @@ function updateGUI(){
 }
 
 function placeStone() {
-	//console.log(stone.mesh.position);
+
 	stone = previewStone;
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 19.5;
-	/*
-	setTimeOut(function(){
-		if(stone.stopped){
-			GAMEOVER = true;
-			pause = true;
-			alert("GAME OVER");
-		}
-	}, 100);
-	*/
+
 	previewStone = nextStone();
 	scene.add(previewStone.mesh);
 	
@@ -79,6 +82,7 @@ function placeStone() {
 
 function nextStone() {
 	var rand = Math.floor(Math.random() * 7);
+	//var rand = 0;
 	switch(rand){
 		case 0: return new StoneLine().create(15.5, 15.5); break;
 		case 1: return new StoneLeftS().create(15.5, 15.5); break;

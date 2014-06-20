@@ -24,14 +24,48 @@ var Bounds = function(){
 		
 		this.mesh = new THREE.Mesh(this.combined_geometry, material);
 		
-		//this.mesh.castShadow = true;
 		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 5;
 		this.mesh.position.y = y || 10;
 		this.mesh.position.z = 0.5;
 		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
-				
+		
+		return this;
+	};
+	
+	this.addCube = function(x, y, applyCollider){
+		applyCollider = applyCollider || true;
+		var geometry = new THREE.Mesh(this.cube_geometry);
+		geometry.position.x = x;
+		geometry.position.y = y;
+		if(applyCollider) this.meshCollider.addCube(geometry.position.x, geometry.position.y);			
+		THREE.GeometryUtils.merge(this.combined_geometry, geometry);
+	};
+};
+
+var Line = function(){
+	this.mesh;
+	this.combined_geometry;
+	this.cube_geometry;
+	this.meshCollider;
+
+	this.create = function(line){		
+		this.combined_geometry = new THREE.Geometry();
+		this.cube_geometry = new THREE.CubeGeometry(1, 1, 1);
+		this.meshCollider = new MeshCollider();
+		
+		for(var i=-4.5; i<5.5; i++) this.addCube(i, line-10.5);
+		
+		var material = materials.wood;
+		
+		this.mesh = new THREE.Mesh(this.combined_geometry, material);
+		
+		this.mesh.position.x = 5;
+		this.mesh.position.y = 10;
+		this.mesh.position.z = 0.5;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+		
 		return this;
 	};
 	

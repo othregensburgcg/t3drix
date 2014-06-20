@@ -97,6 +97,7 @@ function sceneAnimation(){
 		stone.moveDown(.01);
 		if(stone.stopped){
 			stoppedStones.push(stone);
+			checkLines();
 			if(!GAMEOVER) placeStone();
 		}
 		
@@ -109,7 +110,7 @@ function init(){
 	var h = window.innerHeight*.98;
 	
 	scene = new THREE.Scene();
-	camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
+	camera = new THREE.PerspectiveCamera(45, w/h, 0.1, 1000);
 	renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 	
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
@@ -139,7 +140,7 @@ function init(){
 	light.shadowMapHeight = 2048; //better antialias - default is 512
 	light.position.x = 5;
 	light.position.y = 20;
-	light.position.z = 10;
+	light.position.z = 5;
 	light.rotation.x = .35;
 	light.castShadow = true;
 	light.shadowDarkness = 1.0;
@@ -150,8 +151,8 @@ function init(){
 	
 	camera.position.x = 5;
 	camera.position.y = 10;
-	camera.position.z = 15;
-	//camera.rotation.y = .07;
+	camera.position.z = 27;
+	
 	
 	//postprocessing
 	if (window.devicePixelRatio !== undefined) {
