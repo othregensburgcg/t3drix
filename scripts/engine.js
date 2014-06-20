@@ -68,8 +68,8 @@ function addFpsCounter(){
 	
 	// Align top-left
 	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.left = '10px';
-	stats.domElement.style.top = '108px';
+	stats.domElement.style.left = '56px';
+	stats.domElement.style.top = '100px';
 	
 	document.body.appendChild( stats.domElement );
 	
@@ -99,12 +99,14 @@ function sceneAnimation(){
 			stoppedStones.push(stone);
 			if(!GAMEOVER) placeStone();
 		}
+		
+		updateGUI();
 	}
 }
 
 function init(){
-	var w = window.innerWidth;
-	var h = window.innerHeight;
+	var w = window.innerWidth*.98;
+	var h = window.innerHeight*.98;
 	
 	scene = new THREE.Scene();
 	camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
@@ -112,24 +114,38 @@ function init(){
 	
 	renderer.shadowMapType = THREE.PCFSoftShadowMap;//better antialiasing on chrome
 	
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapSoft = true;
+	
+	renderer.shadowCameraNear = 3;
+	renderer.shadowCameraFar = camera.far;
+	renderer.shadowCameraFov = 50;
+	
+	renderer.shadowMapBias = 0.0039;
+	renderer.shadowMapDarkness = 0.5;
+	renderer.shadowMapWidth = 1024;
+	renderer.shadowMapHeight = 1024;
+	
 	renderer.setClearColor(0xFFFFFF, 0);
 	renderer.setSize(w, h);
 	document.body.appendChild(renderer.domElement);
 	
-	addFpsCounter();
+	//addFpsCounter();
 	addGameGrid();
 	startGame();
 	
-	var light = new THREE.PointLight(0xffffff, .9, 0.0);//color, intensity, distance
+	var light = new THREE.DirectionalLight(0xffffff, 0.5);
 	light.shadowMapWidth = 2048; //better antialias - default is 512
 	light.shadowMapHeight = 2048; //better antialias - default is 512
 	light.position.x = 5;
-	light.position.y = 30;
-	light.position.z = 5;
-	light.rotation.x = .25;
+	light.position.y = 20;
+	light.position.z = 10;
+	light.rotation.x = .35;
+	light.castShadow = true;
+	light.shadowDarkness = 1.0;
 	scene.add(light);
 	
-	var ambientLight = new THREE.AmbientLight(0xffffff);
+	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
     scene.add(ambientLight);
 	
 	camera.position.x = 5;

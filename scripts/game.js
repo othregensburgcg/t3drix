@@ -6,6 +6,11 @@ var pauseAfterCollision = false;
 
 var stoppedStones;
 
+var LEVEL = 2;
+var POINTS = 100;
+
+var GUI;
+
 function startGame() {
 	
 	GAMEOVER = false;
@@ -24,6 +29,33 @@ function startGame() {
 	stoppedStones.push(bounds);
 	scene.add(bounds.mesh);
 	
+	drawGUI();
+	
+}
+
+function drawGUI(){
+	var gui_text = document.createElement('div');
+	gui_text.id = "gui_text";
+	gui_text.style.position = 'absolute';
+	//gui_text.style.zIndex = 1;    // if you still don't see the label, try uncommenting this
+	gui_text.style.width = 100;
+	gui_text.style.height = 100;
+	//gui_text.style.backgroundColor = "blue";
+	gui_text.style.color = "white";
+	gui_text.style.fontSize = "60px";
+	gui_text.style.fontWeight = "bold";
+	
+	gui_text.innerHTML = "level 1<br />0 points";
+	
+	gui_text.style.top = 200 + 'px';
+	gui_text.style.left = 200 + 'px';
+	document.body.appendChild(gui_text);
+	
+	GUI = document.getElementById('gui_text');
+}
+
+function updateGUI(){
+	GUI.innerHTML = "level "+LEVEL+"<br />"+POINTS+" points";
 }
 
 function placeStone() {

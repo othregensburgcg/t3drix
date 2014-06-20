@@ -25,10 +25,7 @@
         <script src="./scripts/MeshCollider.js" type="text/javascript"></script>
     </head>
     <body onload="load()">
-        <div>
-			<h1>t3Drix - 3D Tetris</h1>
-			<hr/>
-		</div>
+    	<div class="title">t3Drix - 3D Tetris</div>
     </body>
 </html>
 <style>
@@ -42,5 +39,17 @@
 	body{
 		background: #EEE;
 		font-family: 'Shadows Into Light';
+	}
+	.title{
+		position: fixed;
+		width: 320px;
+		height: 50px;
+		left: 56px;
+		top: 50px;
+		line-height: 50px;
+		overflow: hidden;
+		font-size: 35px;
+		font-weight: 900;
+		color: #FFF;
 	}
 </style>

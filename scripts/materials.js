@@ -19,10 +19,10 @@ var Materials = function(){
 		this.wood = new THREE.MeshLambertMaterial({map: textureWood});
 		
 		var textureMetal = new THREE.ImageUtils.loadTexture("./assets/textures/metal.jpg");
-		textureMetal.repeat.x = .1;
-		textureMetal.repeat.y = .1;
-		textureMetal.offset.x = .0;
-		textureMetal.offset.y = .0;
+		textureMetal.repeat.x = 1;
+		textureMetal.repeat.y = 1;
+		textureMetal.offset.x = 0;
+		textureMetal.offset.y = 0;
 		this.metal = new THREE.MeshPhongMaterial({
 			map: textureMetal, 
 			ambient: 0x333333, 
@@ -31,15 +31,15 @@ var Materials = function(){
 		});
 		
 		var textureConcrete = new THREE.ImageUtils.loadTexture("./assets/textures/concrete.jpg");
-		textureConcrete.repeat.x = .09;
-		textureConcrete.repeat.y = .09;
-		textureConcrete.offset.x = .0;
-		textureConcrete.offset.y = .0;
+		textureConcrete.repeat.x = 1;
+		textureConcrete.repeat.y = 1;
+		textureConcrete.offset.x = 0;
+		textureConcrete.offset.y = 0;
 		this.concrete = new THREE.MeshLambertMaterial({map: textureConcrete});
 		
 		var textureBricks = new THREE.ImageUtils.loadTexture("./assets/textures/bricks.jpg");
-		textureBricks.repeat.x = .5;
-		textureBricks.repeat.y = .5;
+		textureBricks.repeat.x = 1;
+		textureBricks.repeat.y = 1;
 		textureBricks.offset.x = .0;
 		textureBricks.offset.y = .0;
 		this.bricks = new THREE.MeshLambertMaterial({map: textureBricks});

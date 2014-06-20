@@ -10,12 +10,22 @@ var Bounds = function(){
 		this.meshCollider = new MeshCollider();
 		
 		for(var i=-4.5; i<5.5; i++) this.addCube(i, -10.5);//bottom line
-		for(var i=-10.5; i<10.5; i++) this.addCube(-5.5, i);//left line
-		for(var i=-10.5; i<10.5; i++) this.addCube(5.5, i);//right line
+		for(var i=-10.5; i<12.5; i++) this.addCube(-5.5, i);//left line
+		for(var i=-10.5; i<12.5; i++) this.addCube(5.5, i);//right line
+		
+		for(var i=-10.5; i<12.5; i++){
+			for(var k=6.5; k<23.5; k++){
+				if((k>12.5||k<8.5)||(i<3.5||i>8.5)) this.addCube(k, i, false);
+				this.addCube(-k, i, false);			
+			}
+		}
 		
 		var material = materials.concrete;
 		
 		this.mesh = new THREE.Mesh(this.combined_geometry, material);
+		
+		//this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 5;
 		this.mesh.position.y = y || 10;
@@ -25,11 +35,12 @@ var Bounds = function(){
 		return this;
 	};
 	
-	this.addCube = function(x, y){
+	this.addCube = function(x, y, applyCollider){
+		applyCollider = applyCollider || true;
 		var geometry = new THREE.Mesh(this.cube_geometry);
 		geometry.position.x = x;
 		geometry.position.y = y;
-		this.meshCollider.addCube(geometry.position.x, geometry.position.y);			
+		if(applyCollider) this.meshCollider.addCube(geometry.position.x, geometry.position.y);			
 		THREE.GeometryUtils.merge(this.combined_geometry, geometry);
 	};
 };
@@ -72,6 +83,8 @@ var StoneLeftS = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -184,6 +197,8 @@ var StoneRightS = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -292,6 +307,8 @@ var StoneT = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -402,6 +419,8 @@ var StoneLeftL = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -508,6 +527,8 @@ var StoneRightL = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -618,6 +639,8 @@ var StoneCube = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
@@ -720,6 +743,8 @@ var StoneLine = function(){
 		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
 		
 		this.mesh.position.x = x || 4.5;
 		this.mesh.position.y = y || .5;
