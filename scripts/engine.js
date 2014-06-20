@@ -101,8 +101,10 @@ function sceneAnimation(){
 			if(!GAMEOVER) placeStone();
 		}
 		
+		showPause(false);
 		updateGUI();
 	}
+	else showPause(true);
 }
 
 function init(){
