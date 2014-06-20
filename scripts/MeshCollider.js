@@ -84,9 +84,9 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
-					console.log("COLLISION");
-					//console.log(myCube);
-					//console.log(checkCube);
+					console.log("COLLISION AT:");
+					console.log(myCube);
+					console.log(checkCube);
 					
 					if(this.globalPosition[1]>17.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;
@@ -95,10 +95,16 @@ var MeshCollider = function(){
 					}					
 					//---------------------------------------------------
 					
+					leftForbidden = false;
+					rightForbidden = false;
+					
 					return true;
 				}
 			}
 		}
+		
+		leftForbidden = false;
+		rightForbidden = false;
 		
 		return false;
 	};
@@ -129,6 +135,7 @@ var MeshCollider = function(){
 					( b(c1)<t(c2)&&b(c1)>b(c2) )
 				)				
 			)
+			|| ( t(c1)==t(c2)&&b(c1)==b(c2)&&l(c1)==l(c2)&&r(c1)==r(c2) )
 		);
 		
 		function t(cube){

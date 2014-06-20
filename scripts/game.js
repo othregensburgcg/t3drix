@@ -27,7 +27,7 @@ function startGame() {
 }
 
 function placeStone() {
-	console.log(stone.mesh.position);
+	//console.log(stone.mesh.position);
 	stone = previewStone;
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 19.5;
