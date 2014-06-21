@@ -9,9 +9,9 @@ var Bounds = function(){
 		this.cube_geometry = new THREE.CubeGeometry(1, 1, 1);
 		this.meshCollider = new MeshCollider();
 		
-		for(var i=-4.5; i<5.5; i++) this.addCube(i, -10.5);//bottom line
-		for(var i=-10.5; i<12.5; i++) this.addCube(-5.5, i);//left line
-		for(var i=-10.5; i<12.5; i++) this.addCube(5.5, i);//right line
+		for(var i=-4.5; i<5.5; i++) this.addCube(i, -10.5, true);//bottom line
+		for(var i=-10.5; i<12.5; i++) this.addCube(-5.5, i, true);//left line
+		for(var i=-10.5; i<12.5; i++) this.addCube(5.5, i, true);//right line
 		
 		for(var i=-10.5; i<12.5; i++){
 			for(var k=6.5; k<23.5; k++){
@@ -35,7 +35,6 @@ var Bounds = function(){
 	};
 	
 	this.addCube = function(x, y, applyCollider){
-		applyCollider = applyCollider || true;
 		var geometry = new THREE.Mesh(this.cube_geometry);
 		geometry.position.x = x;
 		geometry.position.y = y;

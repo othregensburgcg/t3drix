@@ -101,6 +101,9 @@ var MeshCollider = function(){
 			
 			//swap
 			if(cubesToStay.length > 0){
+				
+				for(var cc=0; cc<cubesToStay.length; cc++) console.log("stay: " + cubesToStay[cc]);
+				
 				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
 				
 				//add new mesh to scene
@@ -110,7 +113,9 @@ var MeshCollider = function(){
 		}
 		
 		for(var i=0; i<indicesToPopFromStopped.length; i++){
-			stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);
+			//stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
+			var searchIndex = stoppedStones.indexOf(stoppedStones[indicesToPopFromStopped[i]]);
+			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
 		}
 		
 		console.log(stoppedStones);
@@ -132,7 +137,7 @@ var MeshCollider = function(){
 				var myCube = this.translateCube(cubeToCheck.slice(0), this.globalPosition[0], this.globalPosition[1]);
 				var checkCube = this.translateCube(stoneToCheck.cubes[k].slice(0), stoneToCheck.globalPosition[0], stoneToCheck.globalPosition[1]);
 				
-				if(this.checkCubesCollision(myCube, checkCube)){
+				if(this.checkLineCubesCollision(myCube, checkCube)){
 					
 					//check if this.lineColliderStoppedIndices contains index i
 					var alreadyContains = false;
@@ -147,15 +152,24 @@ var MeshCollider = function(){
 					
 					if(! alreadyContains){
 						var cubesToStay = stoneToCheck.cubes.slice(0);//copy all cubes
-						cubesToStay.pop(stoneToCheck.cubes[k]);
+						
+						//cubesToStay.pop(stoneToCheck.cubes[k]); //POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
+						var searchIndex = cubesToStay.indexOf(stoneToCheck.cubes[k]);
+						if(searchIndex != -1) cubesToStay.splice(searchIndex, 1);
+						
+						console.log("removed: " + stoneToCheck.cubes[k]);
 						
 						//remove stoneToCheck.cubes[k] because it collides with the line						
 						this.lineColliderStoppedIndices.push(new Array(i, cubesToStay));
 					}
-					else{
-						this.lineColliderStoppedIndices[m][1].pop(stoneToCheck.cubes[k]);
+					else{						
+						//this.lineColliderStoppedIndices[alreadyContainsIndex][1].pop(stoneToCheck.cubes[k]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
+						var searchIndex = this.lineColliderStoppedIndices[alreadyContainsIndex][1].indexOf(stoneToCheck.cubes[k]);
+						if(searchIndex != -1) this.lineColliderStoppedIndices[alreadyContainsIndex][1].splice(searchIndex, 1);
+						
+						console.log("removed: " + stoneToCheck.cubes[k]);
 					}
-					
+					console.log(this.lineColliderStoppedIndices);
 					
 					return true;
 				}
@@ -232,28 +246,35 @@ var MeshCollider = function(){
 			|| ( t(c1)==t(c2)&&b(c1)==b(c2)&&l(c1)==l(c2)&&r(c1)==r(c2) )
 		);
 		
-		function t(cube){
-			var max = -1000;
-			for(var i=1; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
-			return max;
-		};
+	};
+	
+	this.checkLineCubesCollision = function(c1, c2){//check logic and then move complete function to MeshCollider.checkMoveCollision()
 		
-		function b(cube){
-			var min = 1000;
-			for(var i=1; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
-			return min;
-		};
+		return (t(c1)==t(c2)&&b(c1)==b(c2)&&l(c1)==l(c2)&&r(c1)==r(c2));
 		
-		function l(cube){
-			var min = 1000;
-			for(var i=0; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
-			return min;
-		};
-		
-		function r(cube){
-			var max = -1000;
-			for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
-			return max;
-		};
+	};
+	
+	function t(cube){
+		var max = -1000;
+		for(var i=1; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
+		return max;
+	};
+	
+	function b(cube){
+		var min = 1000;
+		for(var i=1; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
+		return min;
+	};
+	
+	function l(cube){
+		var min = 1000;
+		for(var i=0; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
+		return min;
+	};
+	
+	function r(cube){
+		var max = -1000;
+		for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
+		return max;
 	};
 };
