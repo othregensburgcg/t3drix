@@ -90,8 +90,7 @@ var MeshCollider = function(){
 		var indicesToPopFromStopped = new Array();
 		
 		for(var i=0; i<this.lineColliderStoppedIndices.length; i++){
-			var x = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[0];
-			var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
+			
 			
 			//find out which cubes should stay -> cubesToStay
 			var cubesToStay = this.lineColliderStoppedIndices[i][1];			
@@ -102,7 +101,10 @@ var MeshCollider = function(){
 			//swap
 			if(cubesToStay.length > 0){
 				
-				for(var cc=0; cc<cubesToStay.length; cc++) console.log("stay: " + cubesToStay[cc]);
+				//for(var cc=0; cc<cubesToStay.length; cc++) console.log("stay: " + cubesToStay[cc]);
+				
+				var x = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[0];
+				var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
 				
 				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
 				
@@ -118,7 +120,7 @@ var MeshCollider = function(){
 			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
 		}
 		
-		console.log(stoppedStones);
+		//console.log(stoppedStones);
 		
 		this.lineColliderStoppedIndices = new Array();
 		
@@ -192,9 +194,9 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
-					//console.log("COLLISION AT:");
-					//console.log(myCube);
-					//console.log(checkCube);
+					console.log("COLLISION AT:");
+					console.log(myCube);
+					console.log(checkCube);
 					
 					if(this.globalPosition[1]>17.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;

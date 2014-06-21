@@ -45,7 +45,7 @@ function startGame() {
 	scene.add(test_stone2.mesh);
 	stoppedStones.push(test_stone2);
 	
-	console.log(stoppedStones);
+	//console.log(stoppedStones);
 	
 	drawGUI();
 	
@@ -53,9 +53,13 @@ function startGame() {
 
 function checkLines(){
 	
+	lines[0].meshCollider.checkLineFull();
+	
+	/*
 	for(var i=0; i<=19; i++){
 		if(lines[i].meshCollider.checkLineFull()) console.log("LINE " + (i+1) + " FULL!");
 	}
+	*/
 }
 
 function drawGUI(){
