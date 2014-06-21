@@ -159,7 +159,7 @@ var MeshCollider = function(){
 						var searchIndex = cubesToStay.indexOf(stoneToCheck.cubes[k]);
 						if(searchIndex != -1) cubesToStay.splice(searchIndex, 1);
 						
-						console.log("removed: " + stoneToCheck.cubes[k]);
+						//console.log("removed: " + stoneToCheck.cubes[k]);
 						
 						//remove stoneToCheck.cubes[k] because it collides with the line						
 						this.lineColliderStoppedIndices.push(new Array(i, cubesToStay));
@@ -169,9 +169,9 @@ var MeshCollider = function(){
 						var searchIndex = this.lineColliderStoppedIndices[alreadyContainsIndex][1].indexOf(stoneToCheck.cubes[k]);
 						if(searchIndex != -1) this.lineColliderStoppedIndices[alreadyContainsIndex][1].splice(searchIndex, 1);
 						
-						console.log("removed: " + stoneToCheck.cubes[k]);
+						//console.log("removed: " + stoneToCheck.cubes[k]);
 					}
-					console.log(this.lineColliderStoppedIndices);
+					//console.log(this.lineColliderStoppedIndices);
 					
 					return true;
 				}
