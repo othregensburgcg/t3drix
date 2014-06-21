@@ -96,6 +96,9 @@ function sceneAnimation(){
 	if(! pause){
 		stone.moveDown(.01);
 		if(stone.stopped){
+			
+			//for(var i=0; i<4; i++) console.log(stone.meshCollider.cubes[i]);
+			
 			stoppedStones.push(stone);
 			checkLines();
 			if(!GAMEOVER) placeStone();

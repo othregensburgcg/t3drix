@@ -20,7 +20,7 @@ function startGame() {
 	stone = nextStone();
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
-	scene.add(stone.mesh);
+	scene.add(stone.mesh);	
 
 	previewStone = nextStone();
 	scene.add(previewStone.mesh);
@@ -33,12 +33,25 @@ function startGame() {
 	
 	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
 	
+	var test_stone1 = new StoneLine().create(1.5, 1.5);
+	test_stone1.rotateRight();
+	test_stone1.moveDown(1);
+	scene.add(test_stone1.mesh);
+	stoppedStones.push(test_stone1);
+	
+	var test_stone2 = new StoneLine().create(5.5, 1.5);
+	test_stone2.rotateRight();
+	test_stone2.moveDown(1);
+	scene.add(test_stone2.mesh);
+	stoppedStones.push(test_stone2);
+	
+	console.log(stoppedStones);
 	
 	drawGUI();
 	
 }
 
-function checkLines(){	
+function checkLines(){
 	
 	for(var i=0; i<=19; i++){
 		if(lines[i].meshCollider.checkLineFull()) console.log("LINE " + (i+1) + " FULL!");

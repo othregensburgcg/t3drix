@@ -3,6 +3,8 @@ var MeshCollider = function(){
 	this.globalPosition;		
 	this.cubes = new Array();
 	
+	this.lineColliderStoppedIndices = new Array();
+	
 	var size = 1;
 
 	this.addCube = function(x, y){
@@ -78,9 +80,44 @@ var MeshCollider = function(){
 		for(var i=0; i<this.cubes.length; i++){
 
 			if(! this.checkIfCubeCollided(this.cubes[i])){
+				this.lineColliderStoppedIndices = new Array();
 				return false;
 			}						
 		}
+		
+		//from here: line full -> swap normal stones with custom stones
+		
+		var indicesToPopFromStopped = new Array();
+		
+		for(var i=0; i<this.lineColliderStoppedIndices.length; i++){
+			var x = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[0];
+			var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
+			
+			//find out which cubes should stay -> cubesToStay
+			var cubesToStay = this.lineColliderStoppedIndices[i][1];			
+			
+			//remove old mesh from scene
+			scene.remove(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
+			
+			//swap
+			if(cubesToStay.length > 0){
+				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
+				
+				//add new mesh to scene
+				scene.add(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
+			}
+			else indicesToPopFromStopped.push(this.lineColliderStoppedIndices[i][0]);
+		}
+		
+		for(var i=0; i<indicesToPopFromStopped.length; i++){
+			stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);
+		}
+		
+		console.log(stoppedStones);
+		
+		this.lineColliderStoppedIndices = new Array();
+		
+		//-------------------------------------------------------------
 		
 		return true;
 	};
@@ -96,6 +133,29 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(stoneToCheck.cubes[k].slice(0), stoneToCheck.globalPosition[0], stoneToCheck.globalPosition[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
+					
+					//check if this.lineColliderStoppedIndices contains index i
+					var alreadyContains = false;
+					var alreadyContainsIndex;
+					for(var m=0; m<this.lineColliderStoppedIndices.length; m++){
+						if(this.lineColliderStoppedIndices[m][0] == i){
+							alreadyContains = true;
+							alreadyContainsIndex = m;
+							break;
+						}
+					}					
+					
+					if(! alreadyContains){
+						var cubesToStay = stoneToCheck.cubes.slice(0);//copy all cubes
+						cubesToStay.pop(stoneToCheck.cubes[k]);
+						
+						//remove stoneToCheck.cubes[k] because it collides with the line						
+						this.lineColliderStoppedIndices.push(new Array(i, cubesToStay));
+					}
+					else{
+						this.lineColliderStoppedIndices[m][1].pop(stoneToCheck.cubes[k]);
+					}
+					
 					
 					return true;
 				}

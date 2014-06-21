@@ -852,3 +852,87 @@ var StoneLine = function(){
 		return this;
 	};
 };
+
+//custom stones for swapping with normal stones, can move down only
+var StoneCustom = function(){
+	this.mesh;
+	this.meshCollider;
+	this.stopped = false;
+
+	this.create = function(cubes, x, y){
+		
+		var combined_geometry = new THREE.Geometry();
+		var cube_geometry = new THREE.CubeGeometry(1, 1, 1);
+		this.meshCollider = new MeshCollider();
+		
+		for(var i=0; i<cubes.length; i++){
+			var cubex = Math.round(r(cubes[i])+l(cubes[i]))/2;
+			var cubey = Math.round(t(cubes[i])+b(cubes[i]))/2;
+			
+			var geometry = new THREE.Mesh(cube_geometry);
+			geometry.position.x = cubex;
+			geometry.position.y = cubey;
+			this.meshCollider.addCube(geometry.position.x, geometry.position.y);
+			
+			THREE.GeometryUtils.merge(combined_geometry, geometry);
+		}		
+		
+		//if swapping a stone with a new custom stone: material can change randomly if useSpecifiedMaterial set to null
+		var material = useSpecifiedMaterial || materials.getRandomMaterial();
+		
+		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
+		
+		this.mesh.position.x = x;
+		this.mesh.position.y = y;
+		this.mesh.position.z = 0.5;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+				
+		return this;
+		
+		function t(cube){
+			var max = -1000;
+			for(var i=1; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
+			return max;
+		};
+		
+		function b(cube){
+			var min = 1000;
+			for(var i=1; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
+			return min;
+		};
+		
+		function l(cube){
+			var min = 1000;
+			for(var i=0; i<cube.length; i+=2) min = cube[i]<min?cube[i]:min;
+			return min;
+		};
+		
+		function r(cube){
+			var max = -1000;
+			for(var i=0; i<cube.length; i+=2) max = cube[i]>max?cube[i]:max;
+			return max;
+		};
+	};
+	
+	this.moveDown = function(y){
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
+		
+		if(this.meshCollider.checkMoveCollision()){
+				y = 0;
+				this.stopped = true;
+				this.mesh.position.x =(Math.round(this.mesh.position.x*2)/2);
+				this.mesh.position.y = (Math.round(this.mesh.position.y*2)/2);
+				if(this.mesh.position.y<0.5) this.mesh.position.y = 0.5;
+				this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+				if(pauseAfterCollision) window["pause"] = true;
+		}
+		
+		this.mesh.position.y -= y;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+		
+		return this;
+	};
+};
