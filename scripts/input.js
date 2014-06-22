@@ -61,7 +61,7 @@ document.onkeydown = function(evt){
 					rotateForbidden = true;
 					stone.rotateRight();
 				}
-				setTimeout(function(){ rotateForbidden = false; }, 400);
+				setTimeout(function(){ rotateForbidden = false; }, 200);
 				break;
 			case 39: /* rechts - taste behandeln */
 				if(!rightForbidden){

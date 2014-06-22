@@ -66,6 +66,8 @@ var MeshCollider = function(){
 		for(var i=0; i<stoppedStones.length; i++){
 
 			if(this.checkIfCollidesWith(stoppedStones[i])){
+				console.log("COLLIDED STONE: stoppedStones["+i+"]");
+				console.log(stoppedStones);
 				return true;
 			}
 						
@@ -107,6 +109,7 @@ var MeshCollider = function(){
 				var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
 				
 				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
+				stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.stopped = true;
 				
 				//add new mesh to scene
 				scene.add(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
@@ -116,8 +119,11 @@ var MeshCollider = function(){
 		
 		for(var i=0; i<indicesToPopFromStopped.length; i++){
 			//stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
+			/*
 			var searchIndex = stoppedStones.indexOf(stoppedStones[indicesToPopFromStopped[i]]);
 			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
+			*/
+			stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i beacause of displacement of indices after splice
 		}
 		
 		//console.log(stoppedStones);
@@ -164,7 +170,7 @@ var MeshCollider = function(){
 						//remove stoneToCheck.cubes[k] because it collides with the line						
 						this.lineColliderStoppedIndices.push(new Array(i, cubesToStay));
 					}
-					else{						
+					else{					
 						//this.lineColliderStoppedIndices[alreadyContainsIndex][1].pop(stoneToCheck.cubes[k]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
 						var searchIndex = this.lineColliderStoppedIndices[alreadyContainsIndex][1].indexOf(stoneToCheck.cubes[k]);
 						if(searchIndex != -1) this.lineColliderStoppedIndices[alreadyContainsIndex][1].splice(searchIndex, 1);
