@@ -10,6 +10,8 @@ var lines = new Array();
 var LEVEL = 1;
 var POINTS = 0;
 
+SKIP_FRAME = false;
+
 var GUI;
 var GUI_PAUSE;
 
@@ -33,6 +35,7 @@ function startGame() {
 	
 	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
 	
+	/*
 	var test_stone1 = new StoneLine().create(1.5, 1.5);
 	test_stone1.rotateRight();
 	test_stone1.moveDown(1);
@@ -44,7 +47,7 @@ function startGame() {
 	test_stone2.moveDown(1);
 	scene.add(test_stone2.mesh);
 	stoppedStones.push(test_stone2);
-	
+	*/
 	//console.log(stoppedStones);
 	
 	drawGUI();
@@ -53,11 +56,25 @@ function startGame() {
 
 function checkLines(){
 	
-	lines[0].meshCollider.checkLineFull();
+	//lines[0].meshCollider.checkLineFull();
 	
-	/*
+	var anyLineRemoved = false;
 	for(var i=0; i<=19; i++){
-		if(lines[i].meshCollider.checkLineFull()) console.log("LINE " + (i+1) + " FULL!");
+		if(lines[i].meshCollider.checkLineFull()){
+			console.log("LINE " + (i+1) + " FULL!");
+			anyLineRemoved = true;
+		}
+	}
+	
+	if(anyLineRemoved) SKIP_FRAME = true;
+	/*
+	if(anyLineRemoved){
+		for(var i=1; i<stoppedStones.length; i++){//start from 1 because 0 is bounds -> no need to let them fall down
+			stoppedStones[i].stopped = false;
+			while(! stoppedStones[i].stopped){
+				stoppedStones[i].moveDown(0.5);
+			}
+		}		
 	}
 	*/
 }
@@ -128,8 +145,8 @@ function showPause(state){
 }
 
 function nextStone() {
-	var rand = Math.floor(Math.random() * 7);
-	//var rand = 0;
+	//var rand = Math.floor(Math.random() * 7);
+	var rand = 2;
 	switch(rand){
 		case 0: return new StoneLine().create(15.5, 15.5); break;
 		case 1: return new StoneLeftS().create(15.5, 15.5); break;

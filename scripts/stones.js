@@ -3,6 +3,7 @@ var Bounds = function(){
 	this.combined_geometry;
 	this.cube_geometry;
 	this.meshCollider;
+	this.stopped = true;
 
 	this.create = function(x, y){		
 		this.combined_geometry = new THREE.Geometry();
@@ -48,6 +49,7 @@ var Line = function(){
 	this.combined_geometry;
 	this.cube_geometry;
 	this.meshCollider;
+	this.stopped = true;
 
 	this.create = function(line){		
 		this.combined_geometry = new THREE.Geometry();
@@ -856,7 +858,7 @@ var StoneLine = function(){
 var StoneCustom = function(){
 	this.mesh;
 	this.meshCollider;
-	this.stopped = false;
+	this.stopped = true;
 
 	this.create = function(cubes, x, y){
 		
@@ -877,7 +879,7 @@ var StoneCustom = function(){
 		}		
 		
 		//if swapping a stone with a new custom stone: material can change randomly if useSpecifiedMaterial set to null
-		var material = useSpecifiedMaterial || materials.getRandomMaterial();
+		var material = materials.concrete;//useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		this.mesh.castShadow = true;

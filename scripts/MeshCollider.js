@@ -63,14 +63,12 @@ var MeshCollider = function(){
 	
 	this.checkMoveCollision = function(){
 		
-		for(var i=0; i<stoppedStones.length; i++){
-
-			if(this.checkIfCollidesWith(stoppedStones[i])){
+		for(var i=0; i<stoppedStones.length; i++){			
+			if(this.checkIfCollidesWith(stoppedStones[i]) && stoppedStones[i].stopped){
 				console.log("COLLIDED STONE: stoppedStones["+i+"]");
 				console.log(stoppedStones);
 				return true;
-			}
-						
+			}		
 		}
 		
 		return false;
@@ -109,7 +107,7 @@ var MeshCollider = function(){
 				var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
 				
 				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
-				stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.stopped = true;
+				stoppedStones[this.lineColliderStoppedIndices[i][0]].stopped = true;//not needed, because default in StoneCustom
 				
 				//add new mesh to scene
 				scene.add(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
@@ -123,7 +121,7 @@ var MeshCollider = function(){
 			var searchIndex = stoppedStones.indexOf(stoppedStones[indicesToPopFromStopped[i]]);
 			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
 			*/
-			stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i beacause of displacement of indices after splice
+			if((indicesToPopFromStopped[i]-i)!=0) stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i because of displacement of indices after splice
 		}
 		
 		//console.log(stoppedStones);
@@ -200,11 +198,11 @@ var MeshCollider = function(){
 				var checkCube = this.translateCube(checkCubes[k].slice(0), globalPositionCheck[0], globalPositionCheck[1]);
 				
 				if(this.checkCubesCollision(myCube, checkCube)){
-					console.log("COLLISION AT:");
-					console.log(myCube);
-					console.log(checkCube);
+					//console.log("COLLISION AT:");
+					//console.log(myCube);
+					//console.log(checkCube);
 					
-					if(this.globalPosition[1]>17.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
+					if(this.globalPosition[1]>18.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;
 						pause = true;
 						alert("GAME OVER!");

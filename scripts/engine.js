@@ -95,12 +95,27 @@ function sceneAnimation(){
 	
 	if(! pause){
 		stone.moveDown(.01);
+		
+		//-------------------------------------------
+			if(SKIP_FRAME){
+				for(var i=1; i<stoppedStones.length; i++){//start from 1 because 0 is bounds -> no need to let them fall down
+					stoppedStones[i].stopped = false;
+					while(! stoppedStones[i].stopped){
+						stoppedStones[i].moveDown(0.01);
+					}
+				}
+				SKIP_FRAME = false;
+			}
+		//-------------------------------------------
+		
 		if(stone.stopped){
 			
 			//for(var i=0; i<4; i++) console.log(stone.meshCollider.cubes[i]);
 			
 			stoppedStones.push(stone);
+			
 			checkLines();
+			
 			if(!GAMEOVER) placeStone();
 		}
 		
