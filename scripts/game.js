@@ -209,8 +209,8 @@ function showPause(state){
 }
 
 function nextStone() {
-	//var rand = Math.floor(Math.random() * 7);
-	var rand = 2;
+	var rand = Math.floor(Math.random() * 7);
+	//var rand = 2;
 	switch(rand){
 		case 0: return new StoneLine().create(15.5, 15.5); break;
 		case 1: return new StoneLeftS().create(15.5, 15.5); break;

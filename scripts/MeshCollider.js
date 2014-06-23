@@ -145,15 +145,22 @@ var MeshCollider = function(){
 			}
 			else indicesToPopFromStopped.push(this.lineColliderStoppedIndices[i][0]);
 		}
-		
+		/* REMOVING FROM LEFT TO RIGHT
 		for(var i=0; i<indicesToPopFromStopped.length; i++){
 			//stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
-			/*
-			var searchIndex = stoppedStones.indexOf(stoppedStones[indicesToPopFromStopped[i]]);
-			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
-			*/
+		
 			if((indicesToPopFromStopped[i]-i)!=0){
 				stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i because of displacement of indices after splice
+			}
+		}
+		*/
+		//REMOVING FROM RIGHT TO LEFT -> NO DISPLACEMENT
+		indicesToPopFromStopped.sort(function(a, b){ return a - b; });
+		for(var i=indicesToPopFromStopped.length-1; i>=0; i--){
+			//stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
+		
+			if(indicesToPopFromStopped[i]!=0){//bounds should stay!!!
+				stoppedStones.splice(indicesToPopFromStopped[i], 1);
 			}
 		}
 		
