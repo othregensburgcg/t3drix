@@ -152,7 +152,9 @@ var MeshCollider = function(){
 			var searchIndex = stoppedStones.indexOf(stoppedStones[indicesToPopFromStopped[i]]);
 			if(searchIndex != -1) stoppedStones.splice(searchIndex, 1);
 			*/
-			if((indicesToPopFromStopped[i]-i)!=0) stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i because of displacement of indices after splice
+			if((indicesToPopFromStopped[i]-i)!=0){
+				stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i because of displacement of indices after splice
+			}
 		}
 		
 		//console.log(stoppedStones);
