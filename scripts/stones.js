@@ -879,7 +879,7 @@ var StoneCustom = function(){
 		}		
 		
 		//if swapping a stone with a new custom stone: material can change randomly if useSpecifiedMaterial set to null
-		var material = materials.concrete;//useSpecifiedMaterial || materials.getRandomMaterial();
+		var material = useSpecifiedMaterial || materials.getRandomMaterial();
 		
 		this.mesh = new THREE.Mesh(combined_geometry, material);
 		this.mesh.castShadow = true;

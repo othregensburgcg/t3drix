@@ -94,7 +94,7 @@ function load(){
 function sceneAnimation(){
 	
 	if(! pause){
-		stone.moveDown(.01);
+		stone.moveDown(.01*LEVEL);
 		
 		//-------------------------------------------
 		/*
@@ -117,6 +117,11 @@ function sceneAnimation(){
 				var objectsToFall = new Array();//object, units
 	
 				if(linesRemoved.length>0){
+					//#########################################################
+					POINTS += (100 * linesRemoved.length);
+					if(POINTS>=(1000*LEVEL) && LEVEL<9) LEVEL++;
+					//#########################################################
+					
 					for(var i=0; i<linesRemoved.length; i++){
 						if(i==linesRemoved.length-1){
 							for(var k=linesRemoved[i]+1; k<=19; k++){
@@ -163,21 +168,17 @@ function sceneAnimation(){
 					}
 				}
 				
-				//console.log("OBJECTS TO FALL: " + objectsToFall.length);
-				//console.log(objectsToFall);
-				
 				for(var i=0; i<objectsToFall.length; i++){
 					//move stone objectsToFall[i][0] -> objectsToFall[i][1] units down
 					objectsToFall[i][0].mesh.position.y -= objectsToFall[i][1];
 					objectsToFall[i][0].meshCollider.setGlobalPosition(objectsToFall[i][0].mesh.position.x, objectsToFall[i][0].mesh.position.y);
 				}
 				//console.log("DONE MOVING DOWN");
+				SKIP_FRAME = false;
 			}
 		//-------------------------------------------
 		
 		if(stone.stopped){
-			
-			//for(var i=0; i<4; i++) console.log(stone.meshCollider.cubes[i]);
 			
 			stoppedStones.push(stone);
 			

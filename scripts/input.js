@@ -42,7 +42,7 @@ document.onkeydown = function(evt){
 	evt = evt || window.event;
 	evt.preventDefault();
 	
-	//console.log(evt.keyCode);
+	console.log(evt.keyCode);
 	
 	if(evt.keyCode == 27 && pause && !GAMEOVER){
 		pause = ! pause;
@@ -75,6 +75,9 @@ document.onkeydown = function(evt){
 				break;
 			case 110:
 				placeStone();
+				break;
+			case 55:
+				CHEAT = ! CHEAT;
 				break;
 			case 27:
 				//console.log(stone.mesh.position);
