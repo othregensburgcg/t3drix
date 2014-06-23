@@ -10,6 +10,8 @@ var lines = new Array();
 var LEVEL = 1;
 var POINTS = 0;
 
+var linesRemoved;
+
 SKIP_FRAME = false;
 
 var GUI;
@@ -56,17 +58,79 @@ function startGame() {
 
 function checkLines(){
 	
-	//lines[0].meshCollider.checkLineFull();
-	
-	var anyLineRemoved = false;
+	linesRemoved = new Array();
 	for(var i=0; i<=19; i++){
 		if(lines[i].meshCollider.checkLineFull()){
 			console.log("LINE " + (i+1) + " FULL!");
-			anyLineRemoved = true;
+			linesRemoved.push(i);
 		}
 	}
 	
-	if(anyLineRemoved) SKIP_FRAME = true;
+	
+	if(linesRemoved.length>0) SKIP_FRAME = true;//TEST -> UNCOMMENT FOLOWING /* ... */
+	
+	/*
+	var objectsToFall = new Array();//object, units
+	
+	if(linesRemoved.length>0){
+		for(var i=0; i<linesRemoved.length; i++){
+			if(i==linesRemoved.length-1){
+				for(var k=linesRemoved[i]+1; k<=19; k++){
+					//console.log("LET FALL LINE " + k + " " + (i+1) + " UNITS DOWN");
+					
+					var stonesWhichCollideWithLine = lines[k].meshCollider.getStonesWhichCollideWithLine();
+					
+					for(var l=0; l<stonesWhichCollideWithLine.length; l++){//for every stone, which collides with line k
+						//if objectsToFall doesn't contain stonesWhichCollideWithLine[l] yet -> push
+						
+						//var searchIndex = objectsToFall.indexOf(new Array(stonesWhichCollideWithLine[l], i+1));//multidimensional search
+						var searchIndex = -1;
+						for (var m=0; m<objectsToFall.length; m++) {
+							if (objectsToFall[m][0] == stonesWhichCollideWithLine[l]) {
+								searchIndex = m;
+								break;
+							}
+						}
+						if(searchIndex == -1) objectsToFall.push(new Array(stonesWhichCollideWithLine[l], i+1));
+					}
+				}
+			}
+			else{
+				for(var k=linesRemoved[i]+1; k<linesRemoved[i+1]; k++){
+					//console.log("LET FALL LINE " + k + " " + (i+1) + " UNITS DOWN");
+					
+					var stonesWhichCollideWithLine = lines[k].meshCollider.getStonesWhichCollideWithLine();
+					
+					for(var l=0; l<stonesWhichCollideWithLine.length; l++){//for every stone, which collides with line k
+						//if objectsToFall doesn't contain stonesWhichCollideWithLine[l] yet -> push
+						
+						//var searchIndex = objectsToFall.indexOf(new Array(stonesWhichCollideWithLine[l], i+1));//multidimensional search
+						var searchIndex = -1;
+						for (var m=0; m<objectsToFall.length; m++) {
+							if (objectsToFall[m][0] == stonesWhichCollideWithLine[l]) {
+								searchIndex = m;
+								break;
+							}
+						}
+						if(searchIndex == -1) objectsToFall.push(new Array(stonesWhichCollideWithLine[l], i+1));
+					}
+				}
+			}			
+		}
+	}
+	
+	//console.log("OBJECTS TO FALL: " + objectsToFall.length);
+	//console.log(objectsToFall);
+	
+	for(var i=0; i<objectsToFall.length; i++){
+		//move stone objectsToFall[i][0] -> objectsToFall[i][1] units down
+		objectsToFall[i][0].mesh.position.y -= objectsToFall[i][1];
+		objectsToFall[i][0].meshCollider.setGlobalPosition(objectsToFall[i][0].mesh.position.x, objectsToFall[i][0].mesh.position.y);
+	}
+	//console.log("DONE MOVING DOWN");
+	*/
+	
+	//if(anyLineRemoved) SKIP_FRAME = true;
 	/*
 	if(anyLineRemoved){
 		for(var i=1; i<stoppedStones.length; i++){//start from 1 because 0 is bounds -> no need to let them fall down

@@ -65,13 +65,44 @@ var MeshCollider = function(){
 		
 		for(var i=0; i<stoppedStones.length; i++){			
 			if(this.checkIfCollidesWith(stoppedStones[i]) && stoppedStones[i].stopped){
-				console.log("COLLIDED STONE: stoppedStones["+i+"]");
-				console.log(stoppedStones);
+				//console.log("COLLIDED STONE: stoppedStones["+i+"]");
+				//console.log(stoppedStones);
 				return true;
 			}		
 		}
 		
 		return false;
+	};
+	
+	this.getStonesWhichCollideWithLine = function(){
+		
+		var stonesWhichCollideWithLine = new Array();
+		
+		for(var i=0; i<this.cubes.length; i++){			
+			var st = this.getStoneWhichCollidesWithCube(this.cubes[i]);
+			if(st != null) stonesWhichCollideWithLine.push(st);
+		}
+		
+		return stonesWhichCollideWithLine;
+	};
+	
+	this.getStoneWhichCollidesWithCube = function(cubeToCheck){
+		
+		for(var i=1; i<stoppedStones.length; i++){
+			var stoneToCheck = stoppedStones[i].meshCollider;
+			
+			for(var k=0; k<stoneToCheck.cubes.length; k++){
+				
+				var myCube = this.translateCube(cubeToCheck.slice(0), this.globalPosition[0], this.globalPosition[1]);
+				var checkCube = this.translateCube(stoneToCheck.cubes[k].slice(0), stoneToCheck.globalPosition[0], stoneToCheck.globalPosition[1]);
+				
+				if(this.checkLineCubesCollision(myCube, checkCube)){
+					return stoppedStones[i];
+				}				
+			}			
+		}
+		
+		return null;
 	};
 	
 	this.checkLineFull = function(){
