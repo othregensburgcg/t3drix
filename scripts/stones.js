@@ -14,6 +14,7 @@ var Bounds = function(){
 		for(var i=-10.5; i<12.5; i++) this.addCube(-5.5, i, true);//left line
 		for(var i=-10.5; i<12.5; i++) this.addCube(5.5, i, true);//right line
 		
+		
 		for(var i=-10.5; i<12.5; i++){
 			for(var k=6.5; k<23.5; k++){
 				if((k>12.5||k<8.5)||(i<3.5||i>8.5)) this.addCube(k, i, false);

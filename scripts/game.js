@@ -34,7 +34,7 @@ function startGame() {
 	
 	var bounds = new Bounds().create();
 	stoppedStones.push(bounds);
-	scene.add(bounds.mesh);
+	//scene.add(bounds.mesh);
 	
 	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
 	

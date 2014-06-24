@@ -137,11 +137,21 @@ var MeshCollider = function(){
 				var x = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[0];
 				var y = stoppedStones[this.lineColliderStoppedIndices[i][0]].meshCollider.globalPosition[1];
 				
-				stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(cubesToStay, x, y);
-				stoppedStones[this.lineColliderStoppedIndices[i][0]].stopped = true;//not needed, because default in StoneCustom
+				var dividedCubes = this.divideCubes(cubesToStay);
 				
-				//add new mesh to scene
-				scene.add(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
+				for(var k=0; k<dividedCubes.length; k++){
+					if(k==0){
+						stoppedStones[this.lineColliderStoppedIndices[i][0]] = new StoneCustom().create(dividedCubes[k], x, y);
+						stoppedStones[this.lineColliderStoppedIndices[i][0]].stopped = true;//not needed, because default in StoneCustom
+					
+						//add new mesh to scene
+						scene.add(stoppedStones[this.lineColliderStoppedIndices[i][0]].mesh);
+					}
+					else{
+						stoppedStones.push(new StoneCustom().create(dividedCubes[k], x, y));
+						scene.add(stoppedStones[stoppedStones.length-1].mesh);
+					}
+				}
 			}
 			else indicesToPopFromStopped.push(this.lineColliderStoppedIndices[i][0]);
 		}
@@ -171,6 +181,28 @@ var MeshCollider = function(){
 		//-------------------------------------------------------------
 		
 		return true;
+	};
+	
+	this.divideCubes = function(cubes){
+		
+		cubes.sort(function(a, b){ return t(a)-t(b); });
+		
+		var divided = new Array(new Array(), new Array());
+		var returnDivided = false;
+		
+		divided[0].push(cubes[0]);
+		
+		for(var i=1; i<cubes.length; i++){
+			if(t(cubes[i])-t(cubes[i-1])>1 || returnDivided){
+
+				divided[1].push(cubes[i]);
+				returnDivided = true;
+			}
+			else divided[0].push(cubes[i]);
+		}
+		
+		if(returnDivided) return divided;
+		else return new Array(cubes);
 	};
 	
 	this.checkIfCubeCollided = function(cubeToCheck){

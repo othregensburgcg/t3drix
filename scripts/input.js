@@ -42,7 +42,7 @@ document.onkeydown = function(evt){
 	evt = evt || window.event;
 	evt.preventDefault();
 	
-	console.log(evt.keyCode);
+	//console.log(evt.keyCode);
 	
 	if(evt.keyCode == 27 && pause && !GAMEOVER){
 		pause = ! pause;
