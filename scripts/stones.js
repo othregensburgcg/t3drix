@@ -429,7 +429,7 @@ var StoneLeftL = function(){
 		this.meshCollider = new MeshCollider();
 		
 		var geometry1 = new THREE.Mesh(cube_geometry);
-		geometry1.position.x = 1;
+		geometry1.position.x = -1;
 		this.meshCollider.addCube(geometry1.position.x, geometry1.position.y);
 		
 		var geometry2 = new THREE.Mesh(cube_geometry);
@@ -438,12 +438,10 @@ var StoneLeftL = function(){
 		
 		var geometry3 = new THREE.Mesh(cube_geometry);
 		geometry3.position.y = 1;
-		geometry3.position.x = 1;
 		this.meshCollider.addCube(geometry3.position.x, geometry3.position.y);
 		
 		var geometry4 = new THREE.Mesh(cube_geometry);
 		geometry4.position.y = 2;
-		geometry4.position.x = 1;
 		this.meshCollider.addCube(geometry4.position.x, geometry4.position.y);
 		
 		THREE.GeometryUtils.merge(combined_geometry, geometry1);
