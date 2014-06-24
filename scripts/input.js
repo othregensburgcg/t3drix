@@ -79,16 +79,17 @@ document.onkeydown = function(evt){
 			case 55:
 				CHEAT = ! CHEAT;
 				break;
+			case 109:
+				if(LEVEL>0) LEVEL--;
+				break;
+			case 107:
+				if(LEVEL<9) LEVEL++;
+				break;
 			case 27:
-				//console.log(stone.mesh.position);
 				pause = ! pause;
-				//TESTING---------------------------------
-				//test();
-				//console.log(stone.meshCollider.cubes + " -> " + stone.meshCollider.globalPosition);
-				//console.log(stoppedStones[0].meshCollider.cubes + " -> " + stoppedStones[0].meshCollider.globalPosition);
-				//----------------------------------------
 				break;
 			default: break;
 		}
 	}
+	pauseWall.mesh.material.visible = pause;
 };

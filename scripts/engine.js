@@ -25,7 +25,7 @@ function addStandardGrid(){
 			gridgeometry.vertices.push(new THREE.Vector3(-10, 0, i));
 			gridgeometry.vertices.push(new THREE.Vector3(10, 0, i));
 		}
-	}	
+	}
 	var gridmaterial = new THREE.LineBasicMaterial({color: 0x777777});
 	grid = new THREE.Line(gridgeometry, gridmaterial, THREE.LinePieces);
 	scene.add(grid);
@@ -220,7 +220,7 @@ function init(){
 	document.body.appendChild(renderer.domElement);
 	
 	//addFpsCounter();
-	addGameGrid();
+	//addGameGrid();
 	startGame();
 	
 	var light = new THREE.DirectionalLight(0xffffff, 0.5);

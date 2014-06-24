@@ -45,6 +45,53 @@ var Bounds = function(){
 	};
 };
 
+var PauseWall = function(){
+	this.mesh;
+	this.combined_geometry;
+	this.cube_geometry;
+
+	this.create = function(z){
+		this.combined_geometry = new THREE.Geometry();
+		this.cube_geometry = new THREE.CubeGeometry(1, 1, 1);
+		
+		for(var i=-9.5; i<11.5; i++){
+			for(var k=-4.5; k<5.5; k++){
+				this.addCube(k, i);	
+			}
+		}
+		
+		for(var i=3.5; i<9.5; i++){
+			for(var k=8.5; k<13.5; k++){
+				this.addCube(k, i);	
+			}
+		}
+		
+		var textureConcrete = new THREE.ImageUtils.loadTexture("./assets/textures/concrete_bright.jpg");
+		textureConcrete.repeat.x = 1;
+		textureConcrete.repeat.y = 1;
+		textureConcrete.offset.x = 0;
+		textureConcrete.offset.y = 0;
+		var concrete = new THREE.MeshLambertMaterial({map: textureConcrete});
+		
+		this.mesh = new THREE.Mesh(this.combined_geometry, concrete);
+		
+		this.mesh.receiveShadow = true;
+		
+		this.mesh.position.x = 5;
+		this.mesh.position.y = 10;
+		this.mesh.position.z = z;
+		
+		return this;
+	};
+	
+	this.addCube = function(x, y){
+		var geometry = new THREE.Mesh(this.cube_geometry);
+		geometry.position.x = x;
+		geometry.position.y = y;
+		THREE.GeometryUtils.merge(this.combined_geometry, geometry);
+	};
+};
+
 var Line = function(){
 	this.mesh;
 	this.combined_geometry;

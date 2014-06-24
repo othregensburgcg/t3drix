@@ -276,8 +276,8 @@ var MeshCollider = function(){
 					
 					if(this.globalPosition[1]>18.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;
-						pause = true;
-						alert("GAME OVER!");
+						//pause = true;
+						//alert("GAME OVER!");
 					}					
 					//---------------------------------------------------
 					

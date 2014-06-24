@@ -13,6 +13,8 @@ var CHEAT = false;
 
 var linesRemoved;
 
+var pauseWall;
+
 SKIP_FRAME = false;
 
 var GUI;
@@ -34,24 +36,16 @@ function startGame() {
 	
 	var bounds = new Bounds().create();
 	stoppedStones.push(bounds);
-	//scene.add(bounds.mesh);
+	scene.add(bounds.mesh);
+	
+	var backgroundWall = new PauseWall().create(-0.5);
+	scene.add(backgroundWall.mesh);
+	
+	pauseWall = new PauseWall().create(0.6);
+	pauseWall.mesh.material.visible = false;
+	scene.add(pauseWall.mesh);
 	
 	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
-	
-	/*
-	var test_stone1 = new StoneLine().create(1.5, 1.5);
-	test_stone1.rotateRight();
-	test_stone1.moveDown(1);
-	scene.add(test_stone1.mesh);
-	stoppedStones.push(test_stone1);
-	
-	var test_stone2 = new StoneLine().create(5.5, 1.5);
-	test_stone2.rotateRight();
-	test_stone2.moveDown(1);
-	scene.add(test_stone2.mesh);
-	stoppedStones.push(test_stone2);
-	*/
-	//console.log(stoppedStones);
 	
 	drawGUI();
 	
@@ -97,14 +91,15 @@ function drawGUI(){
 	gui_pause_create.style.width = 100;
 	gui_pause_create.style.height = 100;
 
-	gui_pause_create.style.color = "blue";
+	gui_pause_create.style.color = "#FFFFFF";
 	gui_pause_create.style.fontSize = "60px";
 	gui_pause_create.style.fontWeight = "bold";
 	
 	gui_pause_create.innerHTML = "pause";
 	
+	gui_pause_create.style.left = (window.innerWidth*0.5)-140 + 'px';
 	gui_pause_create.style.top = (window.innerHeight*0.5)-20 + 'px';
-	gui_pause_create.style.left = (window.innerWidth*0.5)-50 + 'px';
+	
 	document.body.appendChild(gui_pause_create);
 	
 	GUI_PAUSE = document.getElementById('gui_pause');
@@ -128,10 +123,11 @@ function placeStone() {
 function showPause(state){
 
 	if(state){
-		GUI_PAUSE.innerHTML = "PAUSE";
+		GUI_PAUSE.innerHTML = "&nbsp;&nbsp;&nbsp;PAUSE";
 	}
-	else{
-		GUI_PAUSE.innerHTML = "";
+	else{		
+		if(GAMEOVER) GUI_PAUSE.innerHTML = "GAME OVER!";
+		else GUI_PAUSE.innerHTML = "";
 	}	
 }
 
@@ -141,10 +137,10 @@ function nextStone() {
 	switch(rand){
 		case 0: return new StoneLine().create(15.5, 15.5); break;
 		case 1: return new StoneLeftS().create(15.5, 15.5); break;
-		case 2: return new StoneCube().create(15.5, 15.5); break;
-		case 3: return new StoneLeftL().create(15.5, 15.5); break;
+		case 2: return new StoneCube().create(15.0, 15.5); break;
+		case 3: return new StoneLeftL().create(16.0, 15.0); break;
 		case 4: return new StoneRightS().create(15.5, 15.5); break;
-		case 5: return new StoneRightL().create(15.5, 15.5); break;
+		case 5: return new StoneRightL().create(15.0, 15.0); break;
 		case 6: return new StoneT().create(15.5, 15.5); break;		
 		default: return null; break;
 	}
