@@ -14,6 +14,7 @@ var CHEAT = false;
 var linesRemoved;
 
 var pauseWall;
+var explosion_sphere1;
 
 SKIP_FRAME = false;
 
@@ -48,6 +49,15 @@ function startGame() {
 	for(var i=1; i<=20; i++) lines.push(new Line().create(i));
 	
 	drawGUI();
+	
+	//###########################################################################################
+	//EXPLOSION EXPERIMENT
+	
+	explosion_sphere1 = new Explosion().create(5.5, 5.5, 3000);
+    scene.add(explosion_sphere1.mesh);
+    
+    
+    //###########################################################################################
 	
 }
 

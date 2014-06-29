@@ -44,6 +44,21 @@ var Materials = function(){
 		textureBricks.offset.y = .0;
 		this.bricks = new THREE.MeshLambertMaterial({map: textureBricks});
 		
+		this.fireball = new THREE.ShaderMaterial({
+			uniforms: { 
+		        tExplosion: {
+		            type: "t", 
+		            value: THREE.ImageUtils.loadTexture('./assets/textures/explosion.png')
+		        },
+		        time: { // float initialized to 0
+		            type: "f", 
+		            value: 0.0 
+		        }
+		    },
+		    vertexShader: document.getElementById('vertexShader').textContent,
+		    fragmentShader: document.getElementById('fragmentShader').textContent
+		});
+		
 		this.container = new Array();
 		this.container.push(this.wood);
 		this.container.push(this.metal);
