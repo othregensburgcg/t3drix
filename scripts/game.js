@@ -23,6 +23,7 @@ var GUI;
 var GUI_PAUSE;
 
 var T;
+var preloadExplosion;
 
 function startGame() {
 	
@@ -54,6 +55,9 @@ function startGame() {
 	
 	drawGUI();
 	
+	preloadExplosion = new Explosion().create(-11, 16.5, 3000, 1.5, true, 0.20, 0.25);
+	scene.add(preloadExplosion.mesh);
+	
 }
 
 function checkLines(){
@@ -64,7 +68,7 @@ function checkLines(){
 			console.log("LINE " + (i+1) + " FULL!");
 			linesRemoved.push(i);
 			//ADD EXPLOSIONS:			
-			for(var k=0; k<10; k++) explosionsContainer.push(new Explosion().create(k+0.5, i+0.5, 2000+(100*k)));			
+			for(var k=0; k<10; k+=2) explosionsContainer.push(new Explosion().create(k+1, i+0.5, 1500+(50*k)));			
 		}
 	}
 	

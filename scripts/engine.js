@@ -96,9 +96,8 @@ function load(){
 
 function sceneAnimation(){
 	//EXPLOSION RENDER----------------------------------------------------------------------------------
-	if(explosionsContainer.length > 0){
-		materials.fireball.uniforms['time'].value = .00035 * ( Date.now() - startTime );
-	}
+	materials.fireball.uniforms['time'].value = .00035 * ( Date.now() - startTime );
+	preloadExplosion.run();
 	
 	//ANIMATE EXPLOSIONS
 	if(explosionsContainer.length>0){
@@ -118,7 +117,7 @@ function sceneAnimation(){
 	
 	if(! pause && ! GAMEOVER){
 		stone.moveDown(.01*LEVEL);
-				
+		
 		if(SKIP_FRAME){
 			
 			//SET TIMEOUT FOR STONES TO FALL DOWN (2000ms)
@@ -179,7 +178,7 @@ function sceneAnimation(){
 					objectsToFall[i][0].mesh.position.y -= objectsToFall[i][1];
 					objectsToFall[i][0].meshCollider.setGlobalPosition(objectsToFall[i][0].mesh.position.x, objectsToFall[i][0].mesh.position.y);
 				}
-			}, 3000);
+			}, 1000);
 			
 			SKIP_FRAME = false;
 		}
