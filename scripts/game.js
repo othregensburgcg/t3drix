@@ -11,18 +11,22 @@ var LEVEL = 1;
 var POINTS = 0;
 var CHEAT = false;
 
-var linesRemoved;
+var linesRemoved = new Array();
 
 var pauseWall;
-var explosion_sphere1;
+var explosionsContainer = new Array();
+var removedExplosionsContainer = new Array();
 
 SKIP_FRAME = false;
 
 var GUI;
 var GUI_PAUSE;
 
+var T;
+
 function startGame() {
 	
+	T = new PerformanceTimer();
 	GAMEOVER = false;
 	
 	stone = nextStone();
@@ -50,15 +54,6 @@ function startGame() {
 	
 	drawGUI();
 	
-	//###########################################################################################
-	//EXPLOSION EXPERIMENT
-	
-	explosion_sphere1 = new Explosion().create(5.5, 5.5, 3000);
-    scene.add(explosion_sphere1.mesh);
-    
-    
-    //###########################################################################################
-	
 }
 
 function checkLines(){
@@ -68,7 +63,14 @@ function checkLines(){
 		if(lines[i].meshCollider.checkLineFull()){
 			console.log("LINE " + (i+1) + " FULL!");
 			linesRemoved.push(i);
+			//ADD EXPLOSIONS:			
+			for(var k=0; k<10; k++) explosionsContainer.push(new Explosion().create(k+0.5, i+0.5, 2000+(100*k)));			
 		}
+	}
+	
+	//ADD EXPLOSION MESHES:
+	if(linesRemoved.length>0){
+		for(var i=0; i<explosionsContainer.length; i++) scene.add(explosionsContainer[i].mesh);
 	}
 	
 	if(linesRemoved.length>0) SKIP_FRAME = true;

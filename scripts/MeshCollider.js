@@ -155,15 +155,6 @@ var MeshCollider = function(){
 			}
 			else indicesToPopFromStopped.push(this.lineColliderStoppedIndices[i][0]);
 		}
-		/* REMOVING FROM LEFT TO RIGHT
-		for(var i=0; i<indicesToPopFromStopped.length; i++){
-			//stoppedStones.pop(stoppedStones[indicesToPopFromStopped[i]]);//POP IS BAD, IT REMOVES THE TOP ELEMENT, NOT THE RIGHT ONE!!!
-		
-			if((indicesToPopFromStopped[i]-i)!=0){
-				stoppedStones.splice(indicesToPopFromStopped[i]-i, 1);//-i because of displacement of indices after splice
-			}
-		}
-		*/
 		//REMOVING FROM RIGHT TO LEFT -> NO DISPLACEMENT
 		indicesToPopFromStopped.sort(function(a, b){ return a - b; });
 		for(var i=indicesToPopFromStopped.length-1; i>=0; i--){
@@ -274,10 +265,9 @@ var MeshCollider = function(){
 					//console.log(myCube);
 					//console.log(checkCube);
 					
-					if(this.globalPosition[1]>18.5 && this.globalPosition[0]<9.5 && this.globalPosition[0]>0.5){
+					if(this.globalPosition[1]>18.5 && this.globalPosition[0]<8.5 && this.globalPosition[0]>0.5){
 						GAMEOVER = true;
 						//pause = true;
-						//alert("GAME OVER!");
 					}					
 					//---------------------------------------------------
 					
