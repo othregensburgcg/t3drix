@@ -4,6 +4,8 @@ var dpr, effectFXAA, renderScene;
 var composerEnabled = true;
 var useSpecifiedMaterial;
 
+var ambientLight;
+
 var grid, axis;
 var materials;
 
@@ -112,11 +114,17 @@ function sceneAnimation(){
 		}
 		
 		removedExplosionsContainer = new Array();
-	}	
+	}
+	//--------------------------------------------------------------------------------------------------
+	
+	if(BOSS_COMING && ((Date.now() - startTime)%2000)>1000) redLight();
+	else whiteLight();
+	
 	//--------------------------------------------------------------------------------------------------
 	
 	if(! pause && ! GAMEOVER){
 		stone.moveDown(.01*LEVEL);
+		if(previewStone) previewStone.mesh.rotation.y -= 0.03;
 		
 		if(SKIP_FRAME){
 			
@@ -188,6 +196,8 @@ function sceneAnimation(){
 		
 		if(stone.stopped){
 			
+			if(BOSS_COMING) BOSS_COMING = false;
+			
 			stoppedStones.push(stone);
 			
 			checkLines();
@@ -242,7 +252,7 @@ function init(){
 	light.shadowDarkness = 1.0;
 	scene.add(light);
 	
-	var ambientLight = new THREE.AmbientLight(0xFFFFFF);
+	ambientLight = new THREE.AmbientLight(0xFFFFFF);
     scene.add(ambientLight);
 	
 	camera.position.x = 5;

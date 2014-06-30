@@ -19,8 +19,11 @@ var removedExplosionsContainer = new Array();
 
 SKIP_FRAME = false;
 
+BOSS_COMING = false;
+
 var GUI;
 var GUI_PAUSE;
+var GUI_BOSS;
 
 var T;
 var preloadExplosion;
@@ -119,6 +122,27 @@ function drawGUI(){
 	document.body.appendChild(gui_pause_create);
 	
 	GUI_PAUSE = document.getElementById('gui_pause');
+	
+	var gui_boss_create = document.createElement('div');
+	gui_boss_create.id = "gui_boss";
+	gui_boss_create.style.position = 'absolute';
+
+	gui_boss_create.style.width = 100;
+	gui_boss_create.style.height = 100;
+
+	gui_boss_create.style.color = "#FFFFFF";
+	gui_boss_create.style.fontSize = "60px";
+	gui_boss_create.style.fontWeight = "bold";
+	
+	gui_boss_create.innerHTML = "";
+	
+	gui_boss_create.style.left = (window.innerWidth*0.5)-175 + 'px';
+	gui_boss_create.style.top = (window.innerHeight*0.5)+30 + 'px';
+	
+	document.body.appendChild(gui_boss_create);
+	
+	GUI_BOSS = document.getElementById('gui_boss');
+	
 }
 
 function updateGUI(){
@@ -126,7 +150,9 @@ function updateGUI(){
 }
 
 function spawnBoss(){
-	explosionsContainer.push(new Explosion().create(stone.meshCollider.globalPosition[0], stone.meshCollider.globalPosition[1], 3000, 1, false, 0.15, 0.23));
+	BOSS_COMING = true;
+	
+	explosionsContainer.push(new Explosion().create(stone.meshCollider.globalPosition[0], stone.meshCollider.globalPosition[1], 2000, 1, false, 0.01, 0.23));
 	scene.add(explosionsContainer[explosionsContainer.length-1].mesh);
 	
 	scene.remove(stone.mesh);
@@ -135,6 +161,8 @@ function spawnBoss(){
 }
 
 function placeStone() {
+	previewStone.mesh.rotation.y = 0.0;
+	previewStone.mesh.position.z = 0.5;
 
 	stone = previewStone;
 	stone.mesh.position.x = 4.5;
@@ -145,14 +173,33 @@ function placeStone() {
 	
 }
 
+function redLight(){
+	ambientLight.color.r = 1.0;
+	ambientLight.color.g = 0.0;
+	ambientLight.color.b = 0.0;
+	
+	GUI_BOSS.innerHTML = "!BOSS DANGER!";
+}
+
+function whiteLight(){
+	ambientLight.color.r = 1.0;
+	ambientLight.color.g = 1.0;
+	ambientLight.color.b = 1.0;
+	
+	GUI_BOSS.innerHTML = "";
+}
+
 function showPause(state){
 
 	if(state){
+		previewStone.mesh.rotation.y = 0.0;
+		previewStone.mesh.position.z = 0.5;
 		if(GAMEOVER) GUI_PAUSE.innerHTML = "GAME OVER!";
 		else GUI_PAUSE.innerHTML = "&nbsp;&nbsp;&nbsp;PAUSE";
 	}
 	else{		
 		GUI_PAUSE.innerHTML = "";
+		previewStone.mesh.position.z = 1.5;
 	}	
 }
 
