@@ -33,7 +33,7 @@ function startGame() {
 	stone = nextStone();
 	stone.mesh.position.x = 4.5;
 	stone.mesh.position.y = 21.5;
-	scene.add(stone.mesh);	
+	scene.add(stone.mesh);
 
 	previewStone = nextStone();
 	scene.add(previewStone.mesh);
@@ -67,7 +67,7 @@ function checkLines(){
 		if(lines[i].meshCollider.checkLineFull()){
 			console.log("LINE " + (i+1) + " FULL!");
 			linesRemoved.push(i);
-			//ADD EXPLOSIONS:			
+			//ADD EXPLOSIONS:
 			for(var k=0; k<10; k+=2) explosionsContainer.push(new Explosion().create(k+1, i+0.5, 1500+(50*k)));			
 		}
 	}
@@ -125,6 +125,15 @@ function updateGUI(){
 	GUI.innerHTML = "level "+LEVEL+"<br />"+POINTS+" points";
 }
 
+function spawnBoss(){
+	explosionsContainer.push(new Explosion().create(stone.meshCollider.globalPosition[0], stone.meshCollider.globalPosition[1], 3000, 1, false, 0.15, 0.23));
+	scene.add(explosionsContainer[explosionsContainer.length-1].mesh);
+	
+	scene.remove(stone.mesh);
+	stone = new StoneBoss().create(4.5, 21.5);
+	scene.add(stone.mesh);
+}
+
 function placeStone() {
 
 	stone = previewStone;
@@ -139,11 +148,11 @@ function placeStone() {
 function showPause(state){
 
 	if(state){
-		GUI_PAUSE.innerHTML = "&nbsp;&nbsp;&nbsp;PAUSE";
+		if(GAMEOVER) GUI_PAUSE.innerHTML = "GAME OVER!";
+		else GUI_PAUSE.innerHTML = "&nbsp;&nbsp;&nbsp;PAUSE";
 	}
 	else{		
-		if(GAMEOVER) GUI_PAUSE.innerHTML = "GAME OVER!";
-		else GUI_PAUSE.innerHTML = "";
+		GUI_PAUSE.innerHTML = "";
 	}	
 }
 

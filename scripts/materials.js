@@ -12,10 +12,10 @@ var Materials = function(){
 	this.load = function(){
 		
 		var textureWood = new THREE.ImageUtils.loadTexture("./assets/textures/wood.jpg");
-		textureWood.repeat.x = .1;
-		textureWood.repeat.y = .1;
-		textureWood.offset.x = .1;
-		textureWood.offset.y = .0;
+		textureWood.repeat.x = 1;
+		textureWood.repeat.y = 1;
+		textureWood.offset.x = 0;
+		textureWood.offset.y = 0;
 		this.wood = new THREE.MeshLambertMaterial({map: textureWood});
 		
 		var textureMetal = new THREE.ImageUtils.loadTexture("./assets/textures/metal.jpg");

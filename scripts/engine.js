@@ -128,6 +128,9 @@ function sceneAnimation(){
 					//#########################################################
 					POINTS += (100 * linesRemoved.length);
 					if(POINTS>=(1000*LEVEL) && LEVEL<9) LEVEL++;
+					if(POINTS%1000==100){
+						spawnBoss();
+					}
 					//#########################################################
 					
 					for(var i=0; i<linesRemoved.length; i++){

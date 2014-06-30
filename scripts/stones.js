@@ -983,3 +983,165 @@ var StoneCustom = function(){
 		return this;
 	};
 };
+
+var StoneBoss = function(){
+	this.mesh;	
+	this.meshCollider;
+	this.stopped = false;
+
+	this.create = function(x, y){
+		var combined_geometry = new THREE.Geometry();
+		var cube_geometry = new THREE.CubeGeometry(1, 1, 1);
+		this.meshCollider = new MeshCollider();
+		
+		var geometry1 = new THREE.Mesh(cube_geometry);
+		geometry1.position.x = 0;
+		this.meshCollider.addCube(geometry1.position.x, geometry1.position.y);
+		
+		var geometry2 = new THREE.Mesh(cube_geometry);
+		geometry2.position.x = 1;
+		this.meshCollider.addCube(geometry2.position.x, geometry2.position.y);
+		
+		var geometry3 = new THREE.Mesh(cube_geometry);
+		geometry3.position.x = 0;
+		geometry3.position.y = 1;
+		this.meshCollider.addCube(geometry3.position.x, geometry3.position.y);
+		
+		var geometry4 = new THREE.Mesh(cube_geometry);
+		geometry4.position.x = 1;
+		geometry4.position.y = 1;
+		this.meshCollider.addCube(geometry4.position.x, geometry4.position.y);
+		
+		var geometry5 = new THREE.Mesh(cube_geometry);
+		geometry5.position.x = -2;
+		geometry5.position.y = 2;
+		this.meshCollider.addCube(geometry5.position.x, geometry5.position.y);
+		
+		var geometry6 = new THREE.Mesh(cube_geometry);
+		geometry6.position.x = -1;
+		geometry6.position.y = 1;
+		this.meshCollider.addCube(geometry6.position.x, geometry6.position.y);
+		
+		var geometry7 = new THREE.Mesh(cube_geometry);
+		geometry7.position.x = -2;
+		geometry7.position.y = -2;
+		this.meshCollider.addCube(geometry7.position.x, geometry7.position.y);
+		
+		var geometry8 = new THREE.Mesh(cube_geometry);
+		geometry8.position.x = -1;
+		geometry8.position.y = -1;
+		this.meshCollider.addCube(geometry8.position.x, geometry8.position.y);
+		
+		var geometry9 = new THREE.Mesh(cube_geometry);
+		geometry9.position.x = 3;
+		geometry9.position.y = 2;
+		this.meshCollider.addCube(geometry9.position.x, geometry9.position.y);
+		
+		var geometry10 = new THREE.Mesh(cube_geometry);
+		geometry10.position.x = 2;
+		geometry10.position.y = 1;
+		this.meshCollider.addCube(geometry10.position.x, geometry10.position.y);
+		
+		var geometry11 = new THREE.Mesh(cube_geometry);
+		geometry11.position.x = 3;
+		geometry11.position.y = -2;
+		this.meshCollider.addCube(geometry11.position.x, geometry11.position.y);
+		
+		var geometry12 = new THREE.Mesh(cube_geometry);
+		geometry12.position.x = 2;
+		geometry12.position.y = -1;
+		this.meshCollider.addCube(geometry12.position.x, geometry12.position.y);
+		
+		var geometry13 = new THREE.Mesh(cube_geometry);
+		geometry13.position.x = 0;
+		geometry13.position.y = 2;
+		this.meshCollider.addCube(geometry13.position.x, geometry13.position.y);
+		
+		var geometry14 = new THREE.Mesh(cube_geometry);
+		geometry14.position.x = 1;
+		geometry14.position.y = 2;
+		this.meshCollider.addCube(geometry14.position.x, geometry14.position.y);
+		
+		THREE.GeometryUtils.merge(combined_geometry, geometry1);
+		THREE.GeometryUtils.merge(combined_geometry, geometry2);
+		THREE.GeometryUtils.merge(combined_geometry, geometry3);
+		THREE.GeometryUtils.merge(combined_geometry, geometry4);
+		THREE.GeometryUtils.merge(combined_geometry, geometry5);
+		THREE.GeometryUtils.merge(combined_geometry, geometry6);
+		THREE.GeometryUtils.merge(combined_geometry, geometry7);
+		THREE.GeometryUtils.merge(combined_geometry, geometry8);
+		THREE.GeometryUtils.merge(combined_geometry, geometry9);
+		THREE.GeometryUtils.merge(combined_geometry, geometry10);
+		THREE.GeometryUtils.merge(combined_geometry, geometry11);
+		THREE.GeometryUtils.merge(combined_geometry, geometry12);
+		THREE.GeometryUtils.merge(combined_geometry, geometry13);
+		THREE.GeometryUtils.merge(combined_geometry, geometry14);
+		
+		var material = useSpecifiedMaterial || materials.getRandomMaterial();
+		
+		this.mesh = new THREE.Mesh(combined_geometry, material);
+		this.mesh.castShadow = true;
+		this.mesh.receiveShadow = true;
+		
+		this.mesh.position.x = x || 4.5;
+		this.mesh.position.y = y || .5;
+		this.mesh.position.z = 0.5;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+				
+		return this;
+	};
+	
+	this.moveDown = function(y){
+		
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y - y);
+		
+		if(this.meshCollider.checkMoveCollision()){
+				y = 0;
+				this.stopped = true;
+				this.mesh.position.x =(Math.round(this.mesh.position.x*2)/2);
+				this.mesh.position.y = (Math.round(this.mesh.position.y*2)/2);
+				if(this.mesh.position.y<0.5) this.mesh.position.y = 0.5;
+				this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+				if(pauseAfterCollision) window["pause"] = true;
+		}
+		
+		this.mesh.position.y -= y;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+		
+		return this;
+	};
+	
+	this.moveRight = function(){
+		leftForbidden = false;
+		
+		var delta = 1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
+		
+		if(this.meshCollider.checkMoveCollision()){
+			delta = 0;
+			rightForbidden = true;
+		}		
+		
+		this.mesh.position.x += delta;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+		
+		return this;
+	};
+	
+	this.moveLeft = function(){
+		rightForbidden = false;
+		
+		var delta = -1;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x + delta, this.mesh.position.y);
+		
+		if(this.meshCollider.checkMoveCollision()){
+			delta = 0;
+			leftForbidden = true;
+		}
+		
+		this.mesh.position.x += delta;
+		this.meshCollider.setGlobalPosition(this.mesh.position.x, this.mesh.position.y);
+		
+		return this;
+	};
+};
